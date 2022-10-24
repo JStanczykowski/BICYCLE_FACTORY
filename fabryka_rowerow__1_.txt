@@ -1,0 +1,181 @@
+			technik
+		    skłądnie rowerów
+1 warunki początkowe: technik posiada wszytskie potrzebne części
+2 warunki końcowe: złożony rower
+3 Aktorzy : Technik
+4 przepływ zdarzeń:
+	1 technik sprawdza w systemie model zamowiony przez kliennta
+	2 technik sprawdza stan czesci na magazynie
+	3 technik składa rower
+	4 po złozeniu roweru technik wprowadza rower do systemu
+	5 technik oddaje rower do magazynu
+5 Alternatywny przeplyw zdarzen : 
+	1 roweru nie ma w systemie
+	2 brakuje części do złozęnia roweru
+			serwis rowerów
+1 warunki początkowe: posiada potrzebne przyżądy i cześci so wykonania serwisu
+2 warunki końcowe: wykonanie serwisu roweru
+3 Aktorzy: Technik
+4 przepływ zdarzeń:
+	1 technik sprawdza w systemie ktory rower ma byc serwisowany
+	2 technik odbiera rower z magazynu
+	3 technik sprawdza w systemie czy posiada wszystkie czesci
+	4 technik wykonuje serwis
+	5 technik w systemie wpisuje wykonanie serwisu
+	6 technik oddaje rower do magazynu
+5 alternatywny przeplyw zdarzen:
+	1 nie ma żadnego roweru do serwisu
+	2 brakuje czesci potrzebnych do wykonania serwisu
+	
+		transport rowerow do klientow
+1 warunki początkowe: odebranie zamowienia z magazynu
+2 warunki końcowe: dostarczenie rowerow do klienta
+3 Aktorzy: kierowca
+4 przepływ zdarzeń:
+	1 sprawdzenie w systemie ilosci zamowien
+	2 odebranie zamowien z magazynu
+	3 zaladunek rowerow
+	4 dojazd do klienta
+	5 rozladunek zamowienia
+	6 zaznaczenie w systemie odbioru zamowienia
+5 alternatywny przeplyw zdarzen:
+	1 brak zamowien na dany dzien
+	2 bledne dostarczenie zamowienia
+	3 zozenie reklamcji i odbior zamowienia
+	
+
+		produkcja czesci
+1 warunki początkowe: posiada potrzebnych materialow
+2 warunki końcowe: produkcja czesci
+3 Aktorzy: inzynier produkcji
+4 przepływ zdarzeń:
+	1 sprawdzenie w systemie jakie czesci maja byc prosukowane
+	2 sprawdzenie w systemie czy posiadamy wszytskie materialy
+	3 produkcja czesci
+	4 wprowadzenie w system ile i jakich czesci wyprodukowalismy
+	5 wyslanie czesci do magazynow
+5 alternatywny przeplyw zdarzen:
+	1 brak potrzebnych materialow
+	2 awaria maszyny
+
+		projektowanie czesci
+1 warunki początkowe: potrzeba zaprojektowania czesci
+2 warunki końcowe: zaprojektowanie czesci
+3 Aktorzy: inzynier produkcji
+4 przepływ zdarzeń:
+	1 zlecenie stworzenia nowej czesci
+	2 projektowanie czesci 
+	3 wykonanie prototypu
+	4 WYKONANIE TESTOW
+	5 dopuszczenie czesci do uzytku
+	6 wprowadzenie nowej czesci do systemu
+5 alternatywny przeplyw zdarzen:
+	1 czesc nie przeszla testow
+	2 bład w projektowaniu
+	
+
+		SPRAWDZANIE STANU CZESCI W MAGAZYNIE
+1 warunki początkowe: kontrola stanu magazynu
+2 warunki końcowe: odpowiedni stan magazynu
+3 Aktorzy: magazynier
+4 przepływ zdarzeń:
+	1 sprawdzenie stanu magazynu w sytemie
+	2 domowienie potrzebnego materialu
+	3 umiesczenie domowionych czesci w systemie
+5 alternatywny przeplyw zdarzen:
+	1 blad systemu
+	2 zle uzupelnienie danych w systemie
+
+
+Jako technik chce mieć dostęp do specyfikacji zamówienia, w taki sposób, aby zbudować rower.
+warunki akceptacji:
+1. specyfikacja musi określać model roweru.
+2. specyfikacja musi określac identyfikator koloru roweru.
+3. specyfikacja musi określać rozmiar roweru.
+4. specyfiikacja musi określać wyposażenie dodatkowe.
+
+Jako technik chce mieć dostęp do instrukcji składania danego modelu roweru, aby wiedzieć w jakiej kolejności musze wykonywać czynności celem poprawnego zlozenia roweru.
+warunki akceptacji:
+1. instrukcja musi zawierać spis potrzebanych części
+
+Jako technik chce mieć informacje czy części potrzebne do złożenia roweru są na stanie w magazynie, aby móc rozpocząć składanie roweru.
+warunki akceptacji:
+1. informacja musi zawierać dane o dostępności części lub kiedy będą dostępne
+2. informacja musi zawioerać dane o ilości dostępnych części
+
+Jako technik chcę poinformować, że dane zamówienie jest gotowe, aby poinformować klienta o etapie zamówienia.
+warunki akceptacji:
+1. zamówienie zostało zrealizowane
+
+Jako kierowca chce mieć listę miejsc, aby wieddzieć gdzie mam dostarczyć rowery.
+warunki akceptacji:
+1. lista musi zawierać dokładne adresy
+2. lista musi informacje o priorytetowych dostawach
+3. lista musi zawierac sposób płatności
+
+Jako pracownik działu zamówień 
+
+Jako klient chce mieć informacje na temat oferty firmy w taki sposób aby wybrać odpowiedni rower.
+warunki akceptacji:
+1. 
+Jako klient chce mieć dostęp do informacji na temat etapu realizacji zamówenienia w taki sposób aby przewidzieć dostawe towaru
+warunki akceptacji:
+1. firma musi aktualizować etap realizacji
+2.powiadomienia o zmianie etapu
+Jako klient chce mieć dostęp do metod płatności w taki sposób aby wybrać najwygodniejsza metode
+warunki akceptacji:
+1.firma musi posiadac platnosc online
+2.kurier musi miec mozliwosc przyjecia gotowki
+Jako klient chce mieć możliowość złożenia reklamacji w taki sposób aby móc zwrócić wadliwy produkt
+warunki akceptacji:
+1.
+2.
+Jako magazynier chce mieć informacji o stanie magazynu w taki sposób aby móc zamowić brakujące częsci
+warunki akceptacji:
+1.aktualizowanie w systemie stanu czesci
+2.dostep do systemu
+3.mozliwosc zamowienia towaru
+Jako magazynier chce mieć dostęp specyfikacji zamówień w taki sposób aby zabezpieczyć firme na przyszlosc.
+warunki akceptacji:
+1.dostep do systemu
+2.aktualizowanie specyfikacji zamowien
+Jako inżynier produkcji chcę mieć dostęp do informacji jaką część należy ulepszyć w taki sposób aby klienci byli zadowolei z produktów
+warunki akceptacji:
+1.dostep do systemu
+2.komunikacja z dzialem zamowien
+Jako inżynier produkcji ccę mieć dostęp do programów inżynierskich w taki sposób aby móc ustworzyć projekt produktu.
+warunki akceptacji:
+1.zakup produktu
+2.przedluzanie licencji
+Jako inżynier produkcji potrzxebuję dostępu do maszyn w taki sposób aby wyprodukować dany produkt.
+warunki akceptacji:
+1.posiadanie uprawnien
+2.posiadanie odpowiednich maszyn
+Jako inżinier produkcji che mieć możliwość zlecenia testów, aby mięć pewność że można wprowadzić daną część do masowej produkcji.
+warunki akceptacji:
+1.komunikacja z testerm
+2.posiadanie uprawnien
+
+Jako tester chce mieć dane techniczne produktu, aby wybrac odpowiednie testy.
+warunki akceptacji:
+1.dostep do specyfikacji
+Jako tester chce mieć informacje o pojawieniu się nowej cześć, aby móc ją przetestować.
+warunki akceptacji:
+1.dostep do systemu
+2.aktualizowanie danych
+Jako tester chce mieć mozliwość oceny produktu, abu dopuścić ja do produkcji. 
+warunki akceptacji:
+1.odpowiednie uprawnienia
+Jako księgowa chcę mieć dostęp do zamówien w taki sposób aby móc realizować faktury.
+warunki akceptacji:
+1.odpowiednie uprawnienia
+2.dobra komunikacja z dzialem zamowien
+Jako księgowa chce mieć dostęp do księgi przychodów i rozchodów w taki sposób aby ją prowadzić.
+warunki akceptacji:
+1.odpowiednie uprawnienia
+Jako księgowa chcę mieć dostęp do dochodów fiirmy w taki sposób aby w poprawny sposób obliczyć podatki
+warunki akceptacji:
+1.odpowiednie uprawnienia
+
+	 
+	
