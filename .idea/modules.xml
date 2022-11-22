@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/registration-login-spring-boot-security-thymeleaf.iml" filepath="$PROJECT_DIR$/registration-login-spring-boot-security-thymeleaf.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bicycle-factory.iml" filepath="$PROJECT_DIR$/bicycle-factory.iml" />
     </modules>
   </component>
 </project>
