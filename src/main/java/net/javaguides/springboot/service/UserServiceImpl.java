@@ -2,8 +2,11 @@ package net.javaguides.springboot.service;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 import java.util.stream.Collectors;
 
+import net.javaguides.springboot.model.Worker;
+import net.javaguides.springboot.repository.WorkerRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -20,6 +23,7 @@ import net.javaguides.springboot.web.dto.UserRegistrationDto;
 
 @Service
 public class UserServiceImpl implements UserService{
+
 	@Autowired
 	private UserRepository userRepository;
 	
@@ -39,7 +43,10 @@ public class UserServiceImpl implements UserService{
 
 		return userRepository.save(user);
 	}
-
+	@Override
+	public List<User> getAllUser(){
+		return userRepository.findAll();
+	}
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 	
@@ -49,7 +56,30 @@ public class UserServiceImpl implements UserService{
 		}
 		return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), mapRolesToAuthorities(user.getRoles()));		
 	}
-	
+//	@Override
+//	public User saveWorker(User worker){
+//		return userRepository.save(worker);
+//	}
+@Override
+public User saveWorker(UserRegistrationDto registrationDto) {
+	User user = new User(registrationDto.getFirstName(),
+			registrationDto.getLastName(), registrationDto.getEmail(),
+			passwordEncoder.encode(registrationDto.getPassword()), registrationDto.getRoles());
+
+	return userRepository.save(user);
+}
+	@Override
+	public User getWorkerById(long id){
+		return userRepository.findById(id).get();
+	}
+	@Override
+	public User updateWorker(User worker){
+		return userRepository.save(worker);
+	}
+	@Override
+	public void deleteWorkerById(long id){
+		userRepository.deleteById(id);
+	}
 	private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles){
 		return roles.stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
 	}

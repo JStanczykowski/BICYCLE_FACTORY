@@ -25,8 +25,8 @@ public class MainController {
 	@GetMapping("/index")
 	public String home() {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		if(auth.getAuthorities().toString().equals("[ROLE_USER]"))
-			return "worker";
+		if(auth.getAuthorities().toString().equals("[MENAGO]"))
+			return "redirect:/worker";
 		else
 			return "index";
 

@@ -5,7 +5,7 @@ public class UserRegistrationDto {
 	private String lastName;
 	private String email;
 	private String password;
-	
+	private String roles;
 	public UserRegistrationDto(){
 		
 	}
@@ -17,7 +17,23 @@ public class UserRegistrationDto {
 		this.email = email;
 		this.password = password;
 	}
-	
+	public UserRegistrationDto(String firstName, String lastName, String email, String password,String roles) {
+		super();
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.password = password;
+		this.roles = roles;
+	}
+
+	public String getRoles() {
+		return roles;
+	}
+
+	public void setRoles(String roles) {
+		this.roles = roles;
+	}
+
 	public String getFirstName() {
 		return firstName;
 	}

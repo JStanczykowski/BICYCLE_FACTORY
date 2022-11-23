@@ -43,10 +43,12 @@ public class User {
 	
 	private Collection<Role> roles;
 	
-	public User() {
+	public User(String firstName, String lastName, String email, String encode, String roles) {
 		
 	}
-	
+	public User() {
+
+	}
 	public User(String firstName, String lastName, String email, String password, Collection<Role> roles) {
 		super();
 		this.firstName = firstName;

@@ -1,7 +1,10 @@
 package net.javaguides.springboot.controller;
 
+import net.javaguides.springboot.model.User;
 import net.javaguides.springboot.model.Worker;
+import net.javaguides.springboot.service.UserService;
 import net.javaguides.springboot.service.WorkerService;
+import net.javaguides.springboot.web.dto.UserRegistrationDto;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -9,23 +12,23 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 @RequestMapping("/worker")
 public class WorkerController {
-    private WorkerService workerService;
+    private UserService workerService;
 
-    public WorkerController(WorkerService workerService){this.workerService =workerService;}
+    public WorkerController(UserService workerService){this.workerService =workerService;}
     @GetMapping("")
     public String ListTechnic(Model model){
-        model.addAttribute("workers", workerService.getAllWorker());
+        model.addAttribute("workers", workerService.getAllUser());
         return "worker";
     }
     @GetMapping("/new")
     public String createWorker(Model model){
-        Worker worker = new Worker();
+        User worker = new User();
         model.addAttribute("workers",worker);
         return "add_worker";
     }
     @PostMapping("")
-    public String saveWorker(@ModelAttribute("workers") Worker worker){
-        workerService.saveWorker(worker);
+    public String saveWorker(@ModelAttribute("workers") UserRegistrationDto worker){
+        workerService.save(worker);
         return "redirect:/worker";
     }
     @GetMapping("/edit/{id}")
@@ -34,12 +37,14 @@ public class WorkerController {
         return "edit_worker";
     }
     @PostMapping("/{id}")
-    public String updateWorker(@PathVariable Long id, @ModelAttribute("workers") Worker worker, Model model){
-        Worker existingWorker = workerService.getWorkerById(id);
+    public String updateWorker(@PathVariable Long id, @ModelAttribute("workers") User worker, Model model){
+        User existingWorker = workerService.getWorkerById(id);
         existingWorker.setId(id);
         existingWorker.setFirstName(worker.getLastName());
         existingWorker.setLastName(worker.getLastName());
-        existingWorker.setRole(worker.getRole());
+        existingWorker.setEmail(worker.getEmail());
+        existingWorker.setRoles(worker.getRoles());
+
 
         workerService.updateWorker(existingWorker);
         return "redirect:/worker";
