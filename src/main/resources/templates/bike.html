@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Bike</title>
+</head>
+<body>
+    <div>
+        <ul>
+            <th:block th:each="bike: ${bike}">
+                <span th:text="${bike.serialNumber}"></span>
+            </th:block>
+        </ul>
+    </div>
+</body>
+</html>
