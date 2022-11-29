@@ -44,6 +44,15 @@ public class UserServiceImpl implements UserService{
 		return userRepository.save(user);
 	}
 	@Override
+	public User saveWorker(UserRegistrationDto registrationDto) {
+
+		User user = new User(registrationDto.getFirstName(),
+				registrationDto.getLastName(), registrationDto.getEmail(),
+				passwordEncoder.encode(registrationDto.getPassword()), Arrays.asList(new Role(registrationDto.getRoles())));
+
+		return userRepository.save(user);
+	}
+	@Override
 	public List<User> getAllUser(){
 		return userRepository.findAll();
 	}
@@ -60,14 +69,7 @@ public class UserServiceImpl implements UserService{
 //	public User saveWorker(User worker){
 //		return userRepository.save(worker);
 //	}
-@Override
-public User saveWorker(UserRegistrationDto registrationDto) {
-	User user = new User(registrationDto.getFirstName(),
-			registrationDto.getLastName(), registrationDto.getEmail(),
-			passwordEncoder.encode(registrationDto.getPassword()), registrationDto.getRoles());
 
-	return userRepository.save(user);
-}
 	@Override
 	public User getWorkerById(long id){
 		return userRepository.findById(id).get();

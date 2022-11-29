@@ -1,5 +1,6 @@
 package net.javaguides.springboot.controller;
 
+import net.javaguides.springboot.model.Role;
 import net.javaguides.springboot.model.User;
 import net.javaguides.springboot.model.Worker;
 import net.javaguides.springboot.service.UserService;
@@ -28,7 +29,7 @@ public class WorkerController {
     }
     @PostMapping("")
     public String saveWorker(@ModelAttribute("workers") UserRegistrationDto worker){
-        workerService.save(worker);
+        workerService.saveWorker(worker);
         return "redirect:/worker";
     }
     @GetMapping("/edit/{id}")

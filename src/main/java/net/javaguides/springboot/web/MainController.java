@@ -27,10 +27,14 @@ public class MainController {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		if(auth.getAuthorities().toString().equals("[MENAGO]"))
 			return "redirect:/worker";
+		else if(auth.getAuthorities().toString().equals("[TECHNIC]"))
+			return "redirect:/technic";
 		else
 			return "index";
 
 		}
+	
+
 	@GetMapping("/menago")
 	public String menadzer() {
 		return "menago";}

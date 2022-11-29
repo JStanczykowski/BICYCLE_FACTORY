@@ -32,7 +32,7 @@ public class User {
 	private String email;
 	
 	private String password;
-	
+
 	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinTable(
 			name = "users_roles",
@@ -40,12 +40,10 @@ public class User {
 		            name = "user_id", referencedColumnName = "id"),
 			inverseJoinColumns = @JoinColumn(
 				            name = "role_id", referencedColumnName = "id"))
-	
+
 	private Collection<Role> roles;
-	
-	public User(String firstName, String lastName, String email, String encode, String roles) {
-		
-	}
+
+
 	public User() {
 
 	}
@@ -93,5 +91,6 @@ public class User {
 	public void setRoles(Collection<Role> roles) {
 		this.roles = roles;
 	}
+
 
 }

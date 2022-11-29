@@ -1,0 +1,17 @@
+package net.javaguides.springboot.service;
+
+import net.javaguides.springboot.model.Tasks;
+import net.javaguides.springboot.model.Worker;
+import net.javaguides.springboot.web.dto.UserRegistrationDto;
+import org.springframework.security.core.userdetails.UserDetailsService;
+
+import java.util.List;
+
+public interface TasksService {
+
+        Tasks save(UserRegistrationDto registrationDto);
+        List<Tasks> getAllTasks();
+        Tasks getTaskById(long id);
+        Tasks updateTask(Tasks tasks);
+        void deleteTaskById(long id);
+}
