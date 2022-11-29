@@ -40,9 +40,6 @@
 	<div class="container">
 		<h1>Registration and Login with Spring Boot</h1>
 		Welcome <span sec:authentication="principal.username"> User</span>
-		<div>
-			<button th:href="@{/worker/new}">New worker</button>
-		</div>
 	</div>
 </body>
 </html>
