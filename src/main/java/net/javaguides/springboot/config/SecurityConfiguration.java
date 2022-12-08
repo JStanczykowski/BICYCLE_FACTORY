@@ -46,22 +46,33 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 
-		http.authorizeRequests().antMatchers(
-				"/registration**",
-				"/js/**",
-				"/css/**",
-				"/img/**").permitAll();
+//		http.authorizeRequests().antMatchers(
+//				"/registration**",
+//				"/js/**",
+//				"/css/**",
+//				"/img/**",
+//				"/templates/**").permitAll();
 		http.authorizeRequests()
-				.antMatchers("/").permitAll()
-				.antMatchers("/h2/**").permitAll()
-				.antMatchers("/admin/").hasRole("ADMIN")
+//				.antMatchers("/").permitAll()
+//				.antMatchers("/h2/**").permitAll()
+//
+//				.antMatchers("/worker/edit/**").permitAll()
+//				.antMatchers("/technic/**").permitAll()
+//				.antMatchers("/worker/edit/**").hasRole("MENAGO")
 				//.antMatchers("/index.html").hasRole("USER")
-				.anyRequest().authenticated()
+				.and()
+				.authorizeRequests().antMatchers("/worker/**").permitAll()
+				.and()
+				.authorizeRequests().antMatchers("/worker/edit/**").permitAll()
+				.and()
+				.authorizeRequests().antMatchers("/templates/**").permitAll()
+				//.anyRequest().authenticated()
 				.and()
 				.formLogin()
 				.loginPage("/login")
 				.defaultSuccessUrl("/index", false)
 				.permitAll()
+
 				.and()
 				.logout()
 				.invalidateHttpSession(true)
@@ -72,6 +83,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		http.csrf().disable();
 		http.headers().frameOptions().disable();
 	}
+
 //	@Bean
 //	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 //		http.csrf()

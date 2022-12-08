@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thumealeaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">>
+<html xmlns:th="http://www.thymealeaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 
 <head>
   <meta charset="ISO-8859-1">
@@ -21,7 +21,7 @@
 
 <div class ="container">
   <div class = "row" >
-    <h1 > List worker </h1>
+    <h1 > List worker xd </h1>
   </div>
 
   <div class = "row">
@@ -32,7 +32,8 @@
   <table class ="table table-striped table-dark" th:action="@{/worker}">
     <thead class = "table-dark">
     <tr>
-      <th> Technic firstname</th>
+      <th> Technic id</th>
+
       <th> Technic lastName</th>
       <th> Technic email</th>
       <th> Worker Roles</th>
@@ -41,13 +42,13 @@
     </thead>
     <tbody >
     <tr th:each = "worker: ${workers}">
-      <td th:text = "${worker.firstName}"></td>
+      <td th:text = "${worker.id}"></td>
+
       <td th:text = "${worker.lastName}"></td>
       <td th:text = "${worker.email}"></td>
       <td th:text = "${worker.roles}"></td>
       <td>
-        <a th:href = "@{/worker/edit/{id}(id=${worker.id})}"
-           class = "btn btn-outline-primary">Update</a>
+
 
         <a th:href = "@{/worker/{id}(id=${worker.id})}"
            class = "btn btn-outline-danger">Delete</a>

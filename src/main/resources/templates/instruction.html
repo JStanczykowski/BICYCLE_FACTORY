@@ -26,8 +26,9 @@
 
   <br>
   <div th:action="@{/technic}" th:object = "${technic}">
+    <tr th:each = "technic: ${technic}">
     <td th:text = "${technic.instruction}"></td>
-
+    </tr>
 
   </div>
   <div>

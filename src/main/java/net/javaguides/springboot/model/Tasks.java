@@ -16,15 +16,34 @@ public class Tasks {
     private String time;
     @Column(name="instruction")
     private String instruction;
-
+    @Enumerated(EnumType.STRING)
+    @Column(name="type")
+    private TypeTask type;
     public Tasks() {
     }
 
-    public Tasks(Long id, String orderNumber, String time,String instruction) {
+    public Tasks(Long id, String orderNumber, String time, String instruction, TypeTask type) {
         this.id = id;
         this.orderNumber = orderNumber;
         this.time = time;
         this.instruction = instruction;
+        this.type = type;
+    }
+
+    public String getInstruction() {
+        return instruction;
+    }
+
+    public void setInstruction(String instruction) {
+        this.instruction = instruction;
+    }
+
+    public TypeTask getType() {
+        return type;
+    }
+
+    public void setType(TypeTask type) {
+        this.type = type;
     }
 
     public Long getId() {

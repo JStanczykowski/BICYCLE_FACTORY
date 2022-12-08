@@ -13,6 +13,8 @@ public interface UserService extends UserDetailsService{
 	List<User> getAllUser();
 	User saveWorker(UserRegistrationDto registrationDto);
 	User getWorkerById(long id);
+	User getWorkerByEmail(String username);
 	User updateWorker(User worker);
+	User updateWorkerEdit(User worker);
 	void deleteWorkerById(long id);
 }

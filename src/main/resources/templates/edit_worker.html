@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
   <meta charset="UTF-8">
   <title>Technic Edit</title>
@@ -23,9 +24,9 @@
 <div class = "container">
   <div class = "row">
     <div class ="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
-      <h1 class = "text-center"> Create New worker </h1>
+      <h1 class = "text-center"> Edit worker </h1>
       <div class = "card-body">
-        <form th:action="@{/worker}" th:object = "${workers}" method="POST">
+        <form sec:authorize="isAuthenticated()" th:action="@{/worker}" th:object = "${workers}" method="POST">
           <div class ="form-group">
             <label> Technic firstName </label>
             <input
@@ -58,10 +59,20 @@
             />
           </div>
           <div class ="form-group">
+            <label> worker password </label>
+            <input
+                    type = "text"
+                    name = "model"
+                    th:field = "*{password}"
+                    class = "form-control"
+                    placeholder="worker password"
+            />
+          </div>
+          <div class ="form-group">
             <label> Worker role </label>
             <select
-                    name = "role"
-                    th:field = "*{role}"
+                    name = "roles"
+                    th:field = "*{roles}"
                     class = "form-control"
                     placeholder="Enter worker role"
             />

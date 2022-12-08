@@ -30,16 +30,17 @@
         <tr>
             <th> Tasks order number</th>
             <th> Task time</th>
-
+            <th> Task type</th>
         </tr>
         </thead>
         <tbody >
         <tr th:each = "technic: ${technic}">
             <td th:text = "${technic.orderNumber}"></td>
             <td th:text = "${technic.time}"></td>
+            <td th:text = "${technic.type}"></td>
             <td>
-                <a th:href = "@{/technic/instruction/{id}(id=${technic.id})}"
-                   class = "btn btn-outline-primary">Wykonaj zadanie</a>
+                <a th:href = "@{/technic/{id}(id=${technic.id})}"
+                   class = "btn btn-outline-primary">Instruction</a>
 
             <td>
         </tr>

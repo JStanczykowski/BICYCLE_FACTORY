@@ -52,6 +52,7 @@ public class UserServiceImpl implements UserService{
 
 		return userRepository.save(user);
 	}
+
 	@Override
 	public List<User> getAllUser(){
 		return userRepository.findAll();
@@ -63,7 +64,7 @@ public class UserServiceImpl implements UserService{
 		if(user == null) {
 			throw new UsernameNotFoundException("Invalid username or password.");
 		}
-		return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), mapRolesToAuthorities(user.getRoles()));		
+		return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), mapRolesToAuthorities(user.getRoles()));
 	}
 //	@Override
 //	public User saveWorker(User worker){
@@ -75,7 +76,18 @@ public class UserServiceImpl implements UserService{
 		return userRepository.findById(id).get();
 	}
 	@Override
+	public User getWorkerByEmail(String username){
+		User user2 = userRepository.findByEmail(username);
+		if(user2==null)
+			System.out.println("null");
+		return user2;
+	}
+	@Override
 	public User updateWorker(User worker){
+		return userRepository.save(worker);
+	}
+	@Override
+	public User updateWorkerEdit(User worker){
 		return userRepository.save(worker);
 	}
 	@Override
