@@ -29,11 +29,12 @@ public class Bike {
 
     }
 
-    public Bike(String serialNumber, String bikeType, String size, String color) {
+    public Bike(String serialNumber, String bikeType, String size, String color, Orders orders) {
         this.serialNumber = serialNumber;
         this.bikeType = bikeType;
         this.size = size;
         this.color = color;
+        this.orders = orders;
     }
 
     public Long getId() {

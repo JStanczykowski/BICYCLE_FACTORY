@@ -3,8 +3,6 @@ package net.javaguides.springboot.controller;
 import net.javaguides.springboot.model.Bike;
 import net.javaguides.springboot.service.BikeService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
