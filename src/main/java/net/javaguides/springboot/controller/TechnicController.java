@@ -1,29 +1,47 @@
 package net.javaguides.springboot.controller;
 
+import net.javaguides.springboot.model.Tasks;
+import net.javaguides.springboot.repository.TasksRepo;
 import net.javaguides.springboot.service.TasksService;
 import net.javaguides.springboot.service.UserService;
+import net.javaguides.springboot.web.dto.UserRegistrationDto;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 @Controller
-@RequestMapping("/technic")
 public class TechnicController {
     private TasksService tasksService;
+    private final TasksRepo tasksRepo;
 
-    public TechnicController(TasksService tasksService){this.tasksService =tasksService;}
-    @GetMapping("")
+    public TechnicController(TasksService tasksService,
+                             TasksRepo tasksRepo){this.tasksService =tasksService;
+        this.tasksRepo = tasksRepo;
+    }
+    @GetMapping("/technic")
     public String ListTasks(Model model){
-        model.addAttribute("technic", tasksService.getAllTasks());
+        Predicate<Tasks> byDone = tasks -> tasks.getDone().equals(false);
+        List<Tasks> result = tasksService.getAllTasks().stream().filter(byDone)
+                .collect(Collectors.toList());
+        model.addAttribute("technic", result);
         return "technic";
     }
-//    @GetMapping("/instruction/{id}")
-//    public String InstructionTask(@PathVariable Long id, Model model){
-//        model.addAttribute("technic", tasksService.getTaskById(id));
-//        return "instruction";
-//    }
+    @GetMapping("/technic/instruction/{id}")
+   public String InstructionTask(@PathVariable Long id, Model model){
+        model.addAttribute("technic", tasksService.getTaskById(id));
+        return "instruction";
+    }
+    @PostMapping("/technic/{id}")
+    public String saveTask(@PathVariable Long id,@ModelAttribute("technic") Tasks tasks) {
+        Tasks obj = tasksService.getTaskById(id);
+        obj.setDone(true);
 
+        tasksService.updateTask(obj);
+        return "redirect:/technic";
+    }
 }
