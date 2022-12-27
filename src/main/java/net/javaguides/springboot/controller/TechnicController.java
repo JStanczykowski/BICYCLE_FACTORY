@@ -1,6 +1,7 @@
 package net.javaguides.springboot.controller;
 
 import net.javaguides.springboot.model.Tasks;
+import net.javaguides.springboot.model.TypeTask;
 import net.javaguides.springboot.repository.TasksRepo;
 import net.javaguides.springboot.service.TasksService;
 import net.javaguides.springboot.service.UserService;
@@ -43,5 +44,18 @@ public class TechnicController {
 
         tasksService.updateTask(obj);
         return "redirect:/technic";
+    }
+    @PostMapping("/engineer/bike")
+    public String saveCars(@ModelAttribute("task") Tasks task ){
+        tasksService.save(task);
+        return "redirect:/engineer/bike";
+    }
+    @GetMapping("/engineer/bike/{id}")
+    public String createTask(Model model,@PathVariable Long id){
+        Tasks task = new Tasks();
+        Tasks task1 = tasksService.getTaskById(id);
+        task.setTime(task1.getTime());
+        model.addAttribute("task",task);
+        return "add_bike";
     }
 }

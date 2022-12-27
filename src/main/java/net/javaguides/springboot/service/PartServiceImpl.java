@@ -4,6 +4,7 @@ package net.javaguides.springboot.service;
 import net.javaguides.springboot.model.Part;
 import net.javaguides.springboot.repository.BikeRepository;
 import net.javaguides.springboot.repository.PartRepository;
+import net.javaguides.springboot.repository.TasksRepo;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,15 +15,16 @@ import java.util.Optional;
 import java.util.OptionalInt;
 
 @Service
-@Transactional
 public class PartServiceImpl implements PartService {
-    private final PartRepository partRepository;
+    @Autowired
+    private PartRepository partRepository;
+
 
     @Autowired
     public PartServiceImpl(PartRepository partRepository) {
+        super();
         this.partRepository = partRepository;
     }
-
 
     @Override
     public List<Part> getAllParts() {

@@ -21,20 +21,28 @@ public class Bike {
     @Column(name = "color")
     private String color;
 
-    @ManyToOne(cascade = CascadeType.ALL, optional = false)
-    @JoinColumn(name = "order_id", nullable = false)
-    private Orders orders;
+    @Column(name="active")
+    private Boolean active;
+
 
     public Bike() {
 
     }
 
-    public Bike(String serialNumber, String bikeType, String size, String color, Orders orders) {
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
+    }
+
+    public Bike(String serialNumber, String bikeType, String size, String color, Boolean active) {
         this.serialNumber = serialNumber;
         this.bikeType = bikeType;
         this.size = size;
         this.color = color;
-        this.orders = orders;
+        this.active = active;
     }
 
     public Long getId() {
@@ -57,9 +65,7 @@ public class Bike {
         return color;
     }
 
-    public Orders getOrders() {
-        return orders;
-    }
+
 
     public void setId(Long id) {
         this.id = id;
@@ -81,7 +87,5 @@ public class Bike {
         this.color = color;
     }
 
-    public void setOrders(Orders orders) {
-        this.orders = orders;
-    }
+
 }

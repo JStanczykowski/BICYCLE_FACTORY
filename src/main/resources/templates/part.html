@@ -11,7 +11,7 @@
 </head>
 <body>
 <nav class="navbar navbar-expand-md bg-dark navbar-dark">
-  <a class="navbar-brand" href="@{/worker}">Technic system</a>
+  <a class="navbar-brand" th:href="@{/engineer}">Engineer system</a>
 
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
     <span class="navbar-toggler-icon"></span>
@@ -21,47 +21,39 @@
 
 <div class ="container">
   <div class = "row" >
-    <h1 > List worker xd </h1>
+    <h1 > Parts List  </h1>
   </div>
 
-  <div class = "row">
-    <div class = "col-lg-3"><br>
-      <a th:href = "@{/worker/new}" class = "btn btn-outline-success"> Add worker</a><br>
-    </div>
-  </div><br>
-  <table class ="table table-striped table-dark" th:action="@{/worker}">
+  <br>
+  <table class="table table-hover" th:action="@{/engineer/part}">
     <thead class = "table-dark">
     <tr>
-      <th> Technic id</th>
-
-      <th> Technic lastName</th>
-      <th> Technic email</th>
-      <th> Worker Roles</th>
-      <th> Actions </th>
+      <th> partName</th>
+      <th> catalogNumber</th>
+      <th> partProducer</th>
+      <th> ilosc</th>
+      <th> status</th>
+      <th> Action</th>
     </tr>
     </thead>
     <tbody >
-    <tr th:each = "worker: ${workers}">
-      <td th:text = "${worker.id}"></td>
+    <tr th:each = "engine: ${part}">
+      <td th:text = "${engine.partName}"></td>
+      <td th:text = "${engine.catalogNumber}"></td>
+      <td th:text = "${engine.partProducer}"></td>
+      <td th:text = "${engine.ilosc}"></td>
+      <td th:text = "${engine.stat}"></td><td>
 
-      <td th:text = "${worker.lastName}"></td>
-      <td th:text = "${worker.email}"></td>
-      <td th:text = "${worker.roles}"></td>
+      <a th:href = "@{/engineer/part/{id}(id=${engine.id})}"
+         class="btn btn-dark">Empty</a>
       <td>
-        <a th:href = "@{/worker/reset/{id}(id=${worker.id})}"
-           class="btn btn-warning">Reset password</a>
-        <a th:href = "@{/worker/{id}(id=${worker.id})}"
-           class = "btn btn-outline-danger">Delete</a>
-      <td>
-
-
-      </td>
     </tr>
     </tbody>
-
-
   </table>
+  <div>
 
+
+  </div>
 </div>
 </body>
 </html>

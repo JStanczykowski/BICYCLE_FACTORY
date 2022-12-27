@@ -1,34 +1,34 @@
 package net.javaguides.springboot.controller;
 
 import net.javaguides.springboot.model.Bike;
+import net.javaguides.springboot.model.Tasks;
+import net.javaguides.springboot.model.TypeTask;
 import net.javaguides.springboot.service.BikeService;
+import net.javaguides.springboot.service.TasksService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
-@RequestMapping(path = "/bike")
+@Controller
 public class BikeController {
-    private final BikeService bikeService;
+    private BikeService bikeService;
 
-    @Autowired
+
     public BikeController(BikeService bikeService) {
         this.bikeService = bikeService;
     }
 
-    @GetMapping("")
-    public List<Bike> getBikes() {
-        return bikeService.getAllBikes();
+    @GetMapping("/engineer/bike")
+    public String ListBike(Model model) {
+
+        model.addAttribute("bike", bikeService.getAllBikes());
+        return "bike";
     }
 
-    @PostMapping("/add")
-    public void addBike(@RequestBody Bike bike) {
-        bikeService.saveBike(bike);
-    }
 
-    @DeleteMapping("delete/{bikeid}")
-    public void deleteBike(@PathVariable(name = "bikeid") long bikeId) {
-        bikeService.deleteBikeById(bikeId);
-    }
+
+
 }

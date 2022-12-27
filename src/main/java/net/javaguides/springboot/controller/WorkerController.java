@@ -8,6 +8,8 @@ import net.javaguides.springboot.repository.UserRepository;
 import net.javaguides.springboot.service.UserService;
 import net.javaguides.springboot.service.WorkerService;
 import net.javaguides.springboot.web.dto.UserRegistrationDto;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -19,6 +21,8 @@ import java.util.stream.Collectors;
 @Controller
 @RequestMapping("/worker")
 public class WorkerController {
+    @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
     private UserService workerService;
     private UserRepository userRepository;
     public WorkerController(UserService workerService){this.workerService =workerService;}
@@ -69,6 +73,14 @@ public class WorkerController {
     public String deleteWorker(@PathVariable Long id){
         User obj = workerService.getWorkerById(id);
         obj.setActive(false);
+        workerService.updateWorker(obj);
+        return "redirect:/worker";
+    }
+    @GetMapping("/reset/{id}")
+    public String resetWorker(@PathVariable Long id){
+        User obj = workerService.getWorkerById(id);
+        obj.setPassword(passwordEncoder.encode("password"));
+
         workerService.updateWorker(obj);
         return "redirect:/worker";
     }
