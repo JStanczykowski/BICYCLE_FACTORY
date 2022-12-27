@@ -23,8 +23,13 @@ public class BikeServiceImpl implements BikeService {
         return bikeRepository.findAll();
     }
 
-    @Override
+
     public Bike saveBike(Bike bike) {
+        return bikeRepository.save(bike);
+    }
+
+    @Override
+    public Bike saveBikeBuilder(Bike bike) {
         return bikeRepository.save(bike);
     }
 
@@ -34,7 +39,7 @@ public class BikeServiceImpl implements BikeService {
     }
 
     @Override
-    public Bike updateBike(Bike bike) {
+    public Bike updateBike(Bike  bike) {
         return bikeRepository.save(bike);
     }
 

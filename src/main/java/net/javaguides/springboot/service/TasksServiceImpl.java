@@ -1,17 +1,15 @@
 package net.javaguides.springboot.service;
 
+import net.javaguides.springboot.Component.Create;
+import net.javaguides.springboot.Component.TypeTaskFactory;
 import net.javaguides.springboot.model.Tasks;
-import net.javaguides.springboot.model.User;
-import net.javaguides.springboot.model.Worker;
+import net.javaguides.springboot.model.TypeTask;
 import net.javaguides.springboot.repository.TasksRepo;
-import net.javaguides.springboot.repository.UserRepository;
 import net.javaguides.springboot.web.dto.UserRegistrationDto;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
 import java.util.List;
 
 @Service
@@ -19,11 +17,12 @@ public class TasksServiceImpl implements TasksService{
     @Autowired
     private TasksRepo tasksRepo;
 
-
+    private final TypeTaskFactory typeTaskFactory;
     @Autowired
-    public TasksServiceImpl(TasksRepo tasksRepo) {
+    public TasksServiceImpl(TasksRepo tasksRepo, TypeTaskFactory typeTaskFactory) {
         super();
         this.tasksRepo = tasksRepo;
+        this.typeTaskFactory = typeTaskFactory;
     }
     @Override
     public Tasks save(UserRegistrationDto registrationDto) {
@@ -46,6 +45,14 @@ public class TasksServiceImpl implements TasksService{
     public void deleteTaskById(long id){
         tasksRepo.deleteById(id);
     }
+    @Override
+    public void doSomething(TypeTask typeTask, Object o) {
+        typeTaskFactory.getType(typeTask).doSomething(o);
+    }
 
+    @PostConstruct
+    public void test() {
+        doSomething(TypeTask.create, new Create());
+    }
 
 }

@@ -44,9 +44,14 @@ public class BikeTest {
     void addBike() {
         LocalDate localDate = LocalDate.now();
         Orders orders = new Orders("blabla", localDate);
-        Bike bike = new Bike("dsaa", "dsada", "dasda ", "das", orders);
+        Bike bike = new Bike.BikeEntityBuilder().
+                setSerialNumber("sa").
+                setBikeType("type").
+                setSize("size").
+                setColor("color").
+                build();
         ordersService.saveOrder(orders);
-        bikeServiceImpl.saveBike(bike);
+        bikeServiceImpl.saveBikeBuilder(bike);
 
         List<Bike> all = bikeRepository.findAll();
 
@@ -57,7 +62,14 @@ public class BikeTest {
     void removeBike() {
         LocalDate localDate = LocalDate.now();
         Orders orders = new Orders("blabla", localDate);
-        Bike bike = new Bike("dsaa", "dsada", "dasda ", "das", orders);
+        Bike bike = new Bike.
+                BikeEntityBuilder().
+                setSerialNumber("sa").
+                setBikeType("type").
+                setSize("size").
+                setColor("color").
+                setOrder(orders).
+                build();
         ordersService.saveOrder(orders);
         bikeServiceImpl.deleteBikeById(1);
 
