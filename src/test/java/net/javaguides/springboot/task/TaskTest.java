@@ -27,11 +27,7 @@ public class TaskTest {
     void setup() {
         tasksRepo = mock(TasksRepo.class);
         tasksServiceImpl = mock(TasksServiceImpl.class);
-        typeTaskFactory = new CreateTypeTask<Create>();
+        //typeTaskFactory = new CreateTypeTask<Create>();
     }
 
-    @Test
-    void addCreateTask() {
-        CreateTypeTask createTypeTask = typeTaskFactory.ge
-    }
 }

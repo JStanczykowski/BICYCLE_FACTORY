@@ -1,5 +1,8 @@
 package net.javaguides.springboot.bike;
 
+import net.javaguides.springboot.decorator.BikeInterface;
+import net.javaguides.springboot.decorator.BikeWithBlotnik;
+import net.javaguides.springboot.decorator.BikeWithRabat;
 import net.javaguides.springboot.model.Bike;
 import net.javaguides.springboot.model.Orders;
 import net.javaguides.springboot.repository.BikeRepository;
@@ -72,6 +75,48 @@ public class BikeTest {
                 build();
         ordersService.saveOrder(orders);
         bikeServiceImpl.deleteBikeById(1);
+
+        List<Bike> all = bikeRepository.findAll();
+
+        assertThat(all.contains(bike));
+    }
+
+    @Test
+    void addBikeWithBlotnik() {
+        LocalDate localDate = LocalDate.now();
+        Orders orders = new Orders("blabla", localDate);
+        Bike bike = new Bike.BikeEntityBuilder().
+                setSerialNumber("sa").
+                setBikeType("type").
+                setSize("size").
+                setColor("color").
+                build();
+        BikeInterface bikeInterface = new BikeWithBlotnik(bike);
+
+        bikeInterface.dodaj();
+        ordersService.saveOrder(orders);
+        bikeServiceImpl.saveBikeBuilder(bike);
+
+        List<Bike> all = bikeRepository.findAll();
+
+        assertThat(all.contains(bike));
+    }
+    @Test
+    void addBikeWithRabat() {
+        LocalDate localDate = LocalDate.now();
+        Orders orders = new Orders("blabla", localDate);
+        Bike bike = new Bike.BikeEntityBuilder().
+                setSerialNumber("sa").
+                setBikeType("type").
+                setSize("size").
+                setColor("color").
+                setPrice(1000).
+                build();
+        BikeInterface bikeInterface = new BikeWithRabat(bike);
+
+        bikeInterface.dodaj();
+        ordersService.saveOrder(orders);
+        bikeServiceImpl.saveBikeBuilder(bike);
 
         List<Bike> all = bikeRepository.findAll();
 

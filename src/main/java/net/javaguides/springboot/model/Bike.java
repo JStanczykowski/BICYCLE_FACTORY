@@ -1,10 +1,12 @@
 package net.javaguides.springboot.model;
 
+import net.javaguides.springboot.decorator.BikeInterface;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "Bike")
-public class Bike {
+public class Bike implements BikeInterface {
 
         @Id
         @GeneratedValue(strategy = GenerationType.AUTO)
@@ -22,28 +24,60 @@ public class Bike {
         @Column(name = "color")
         private String color;
 
+        @Column(name = "price")
+        private int price;
+
+        @Column(name = "addextend")
+        private String addextend;
+
         @ManyToOne(cascade = CascadeType.ALL, optional = false)
         @JoinColumn(name = "order_id", nullable = false)
         private Orders orders;
 
-        public Bike() {
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
+    public String getAddextend() {
+        return addextend;
+    }
+
+    public void setAddextend(String addextend) {
+        this.addextend = addextend;
+    }
+
+    public Bike() {
 
         }
 
-        public Bike(String serialNumber, String bikeType, String size, String color, Orders orders) {
+        public Bike(String serialNumber, String bikeType, String size, String color, Orders orders, int price) {
             this.serialNumber = serialNumber;
             this.bikeType = bikeType;
             this.size = size;
             this.color = color;
             this.orders = orders;
+            this.price = price;
         }
-        public static class BikeEntityBuilder {
+
+    @Override
+    public void dodaj() {
+        this.setAddextend("");
+    }
+
+    public static class BikeEntityBuilder {
             private String serialNumber;
             private String bikeType;
             private String size;
             private String color;
             private Orders orders;
 
+            private int price;
+
+            private String addextend;
 
             public BikeEntityBuilder() {
 
@@ -66,6 +100,14 @@ public class Bike {
                 this.color = color;
                 return this;
             }
+            public BikeEntityBuilder setPrice(int price) {
+                this.price = price;
+                return this;
+            }
+            public BikeEntityBuilder setAddExtend(String addextend) {
+                this.addextend = addextend;
+                return this;
+            }
             public BikeEntityBuilder setOrder(Orders orders) {
                 this.orders = orders;
                 return this;
@@ -78,10 +120,11 @@ public class Bike {
                 bike.size = size;
                 bike.color = color;
                 bike.orders = orders;
+                bike.price = price;
+                bike.addextend = addextend;
                 return bike;
             }
         }
-
         public Long getId() {
             return id;
         }
