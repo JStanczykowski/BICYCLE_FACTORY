@@ -48,8 +48,8 @@
       <td th:text = "${worker.email}"></td>
       <td th:text = "${worker.roles}"></td>
       <td>
-
-
+        <a th:href = "@{/worker/reset/{id}(id=${worker.id})}"
+           class="btn btn-warning">Reset password</a>
         <a th:href = "@{/worker/{id}(id=${worker.id})}"
            class = "btn btn-outline-danger">Delete</a>
       <td>

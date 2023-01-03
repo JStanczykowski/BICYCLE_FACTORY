@@ -29,6 +29,10 @@ public class MainController {
 			return "redirect:/worker";
 		else if(auth.getAuthorities().toString().equals("[TECHNIC]"))
 			return "redirect:/technic";
+		else if(auth.getAuthorities().toString().equals("[INZYNIER]"))
+			return "redirect:/engineer";
+		else if(auth.getAuthorities().toString().equals("[STOCKMAN]"))
+			return "redirect:/stockman";
 		else
 			return "index";
 

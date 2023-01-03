@@ -18,17 +18,71 @@ public class Part {
     @Column(name = "partProducer")
     private String partProducer;
 
-    @ManyToOne(cascade = CascadeType.ALL, optional = false)
-    @JoinColumn(name = "bike_id", nullable = false)
-    private Bike bike;
+    @Column(name="ilosc")
+    private int ilosc;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name="stat")
+    private status stat;
+
+
+    public status getStat() {
+        return stat;
+    }
+
+    public void setStat(status stat) {
+        this.stat = stat;
+    }
 
     public Part() {
 
     }
 
-    public Part(String partName, int catalogNumber, String partProducer) {
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getPartName() {
+        return partName;
+    }
+
+    public void setPartName(String partName) {
+        this.partName = partName;
+    }
+
+    public int getCatalogNumber() {
+        return catalogNumber;
+    }
+
+    public void setCatalogNumber(int catalogNumber) {
+        this.catalogNumber = catalogNumber;
+    }
+
+    public String getPartProducer() {
+        return partProducer;
+    }
+
+    public void setPartProducer(String partProducer) {
+        this.partProducer = partProducer;
+    }
+
+    public int getIlosc() {
+        return ilosc;
+    }
+
+    public void setIlosc(int ilosc) {
+        this.ilosc = ilosc;
+    }
+
+    public Part(String partName, int catalogNumber, String partProducer, int ilosc,status stat) {
         this.partName = partName;
         this.catalogNumber = catalogNumber;
         this.partProducer = partProducer;
+        this.ilosc = ilosc;
+        this.stat = stat;
     }
 }

@@ -16,17 +16,29 @@ public class Tasks {
     private String time;
     @Column(name="instruction")
     private String instruction;
+
+    public Boolean getDone() {
+        return done;
+    }
+
+    public void setDone(Boolean done) {
+        this.done = done;
+    }
+
+    @Column(name="done")
+    private Boolean done;
     @Enumerated(EnumType.STRING)
     @Column(name="type")
     private TypeTask type;
     public Tasks() {
     }
 
-    public Tasks(Long id, String orderNumber, String time, String instruction, TypeTask type) {
+    public Tasks(Long id, String orderNumber, String time, String instruction, Boolean done, TypeTask type) {
         this.id = id;
         this.orderNumber = orderNumber;
         this.time = time;
         this.instruction = instruction;
+        this.done = done;
         this.type = type;
     }
 

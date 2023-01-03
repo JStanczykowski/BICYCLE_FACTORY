@@ -18,8 +18,9 @@ public class Bike implements BikeInterface {
         @Column(name = "bikeType")
         private String bikeType;
 
-        @Column(name = "size")
-        private String size;
+    @Column(name="active")
+    private Boolean active;
+
 
         @Column(name = "color")
         private String color;

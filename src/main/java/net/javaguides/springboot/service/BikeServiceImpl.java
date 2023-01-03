@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-@Transactional
 public class BikeServiceImpl implements BikeService {
     private final BikeRepository bikeRepository;
 
@@ -37,6 +36,7 @@ public class BikeServiceImpl implements BikeService {
     public Bike getBikeById(long id) {
         return bikeRepository.findById(id).get();
     }
+
 
     @Override
     public Bike updateBike(Bike  bike) {

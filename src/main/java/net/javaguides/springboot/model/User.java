@@ -25,7 +25,8 @@ public class User {
 	
 	@Column(name = "first_name")
 	private String firstName;
-	
+	@Column(name ="active")
+	private Boolean active=true;
 	@Column(name = "last_name")
 	private String lastName;
 	@Column(name = "email")
@@ -33,6 +34,14 @@ public class User {
 
 	@Column(name = "password")
 	private String password;
+
+	public Boolean isActive() {
+		return active;
+	}
+
+	public void setActive(Boolean active) {
+		this.active = active;
+	}
 
 	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinTable(

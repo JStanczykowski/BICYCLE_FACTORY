@@ -25,7 +25,7 @@ public class TasksServiceImpl implements TasksService{
         this.typeTaskFactory = typeTaskFactory;
     }
     @Override
-    public Tasks save(UserRegistrationDto registrationDto) {
+    public Tasks save(Tasks tasks) {
         return null;
     }
 

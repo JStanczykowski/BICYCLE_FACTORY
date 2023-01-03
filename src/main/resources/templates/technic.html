@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thumealeaf.org"
+<html xmlns:th="http://www.thymealeaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 
 <head>
@@ -39,7 +39,7 @@
             <td th:text = "${technic.time}"></td>
             <td th:text = "${technic.type}"></td>
             <td>
-                <a th:href = "@{/technic/{id}(id=${technic.id})}"
+                <a th:href = "@{/technic/instruction/{id}(id=${technic.id})}"
                    class = "btn btn-outline-primary">Instruction</a>
 
             <td>

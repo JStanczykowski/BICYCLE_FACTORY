@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface TasksService {
 
-        Tasks save(UserRegistrationDto registrationDto);
+        Tasks save(Tasks tasks);
         List<Tasks> getAllTasks();
         Tasks getTaskById(long id);
         Tasks updateTask(Tasks tasks);
