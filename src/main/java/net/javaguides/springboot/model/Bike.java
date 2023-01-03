@@ -1,91 +1,177 @@
 package net.javaguides.springboot.model;
 
+import net.javaguides.springboot.decorator.BikeInterface;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "Bike")
-public class Bike {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+public class Bike implements BikeInterface {
 
-    @Column(name = "serialNumber")
-    private String serialNumber;
+        @Id
+        @GeneratedValue(strategy = GenerationType.AUTO)
+        private Long id;
 
-    @Column(name = "bikeType")
-    private String bikeType;
+        @Column(name = "serialNumber")
+        private String serialNumber;
 
-    @Column(name = "size")
-    private String size;
-
-    @Column(name = "color")
-    private String color;
+        @Column(name = "bikeType")
+        private String bikeType;
 
     @Column(name="active")
     private Boolean active;
 
 
+        @Column(name = "color")
+        private String color;
+
+        @Column(name = "price")
+        private int price;
+
+        @Column(name = "addextend")
+        private String addextend;
+
+        @ManyToOne(cascade = CascadeType.ALL, optional = false)
+        @JoinColumn(name = "order_id", nullable = false)
+        private Orders orders;
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
+    public String getAddextend() {
+        return addextend;
+    }
+
+    public void setAddextend(String addextend) {
+        this.addextend = addextend;
+    }
+
     public Bike() {
 
+        }
+
+        public Bike(String serialNumber, String bikeType, String size, String color, Orders orders, int price) {
+            this.serialNumber = serialNumber;
+            this.bikeType = bikeType;
+            this.size = size;
+            this.color = color;
+            this.orders = orders;
+            this.price = price;
+        }
+
+    @Override
+    public void dodaj() {
+        this.setAddextend("");
     }
 
-    public Boolean getActive() {
-        return active;
-    }
+    public static class BikeEntityBuilder {
+            private String serialNumber;
+            private String bikeType;
+            private String size;
+            private String color;
+            private Orders orders;
 
-    public void setActive(Boolean active) {
-        this.active = active;
-    }
+            private int price;
 
-    public Bike(String serialNumber, String bikeType, String size, String color, Boolean active) {
-        this.serialNumber = serialNumber;
-        this.bikeType = bikeType;
-        this.size = size;
-        this.color = color;
-        this.active = active;
-    }
+            private String addextend;
 
-    public Long getId() {
-        return id;
-    }
+            public BikeEntityBuilder() {
 
-    public String getSerialNumber() {
-        return serialNumber;
-    }
+            }
 
-    public String getBikeType() {
-        return bikeType;
-    }
+            public BikeEntityBuilder setSerialNumber(String serialNumber) {
+                this.serialNumber = serialNumber;
+                return this;
+            }
 
-    public String getSize() {
-        return size;
-    }
+            public BikeEntityBuilder setBikeType(String bikeType) {
+                this.bikeType = bikeType;
+                return this;
+            }
+            public BikeEntityBuilder setSize(String size) {
+                this.size = size;
+                return this;
+            }
+            public BikeEntityBuilder setColor(String color) {
+                this.color = color;
+                return this;
+            }
+            public BikeEntityBuilder setPrice(int price) {
+                this.price = price;
+                return this;
+            }
+            public BikeEntityBuilder setAddExtend(String addextend) {
+                this.addextend = addextend;
+                return this;
+            }
+            public BikeEntityBuilder setOrder(Orders orders) {
+                this.orders = orders;
+                return this;
+            }
 
-    public String getColor() {
-        return color;
-    }
+            public Bike build() {
+                Bike bike = new Bike();
+                bike.serialNumber = this.serialNumber;
+                bike.bikeType = this.bikeType;
+                bike.size = size;
+                bike.color = color;
+                bike.orders = orders;
+                bike.price = price;
+                bike.addextend = addextend;
+                return bike;
+            }
+        }
+        public Long getId() {
+            return id;
+        }
 
+        public String getSerialNumber() {
+            return serialNumber;
+        }
 
+        public String getBikeType() {
+            return bikeType;
+        }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+        public String getSize() {
+            return size;
+        }
 
-    public void setSerialNumber(String serialNumber) {
-        this.serialNumber = serialNumber;
-    }
+        public String getColor() {
+            return color;
+        }
 
-    public void setBikeType(String bikeType) {
-        this.bikeType = bikeType;
-    }
+        public Orders getOrders() {
+            return orders;
+        }
 
-    public void setSize(String size) {
-        this.size = size;
-    }
+        public void setId(Long id) {
+            this.id = id;
+        }
 
-    public void setColor(String color) {
-        this.color = color;
-    }
+        public void setSerialNumber(String serialNumber) {
+            this.serialNumber = serialNumber;
+        }
 
+        public void setBikeType(String bikeType) {
+            this.bikeType = bikeType;
+        }
+
+        public void setSize(String size) {
+            this.size = size;
+        }
+
+        public void setColor(String color) {
+            this.color = color;
+        }
+
+        public void setOrders(Orders orders) {
+            this.orders = orders;
+        }
 
 }

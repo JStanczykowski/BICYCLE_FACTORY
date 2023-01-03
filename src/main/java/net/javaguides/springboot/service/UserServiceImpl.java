@@ -30,16 +30,19 @@ public class UserServiceImpl implements UserService{
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
 	@Autowired
-	public UserServiceImpl(UserRepository userRepository) {
+	public UserServiceImpl(UserRepository userRepository, BCryptPasswordEncoder bCryptPasswordEncoder) {
 		super();
 		this.userRepository = userRepository;
+		this.passwordEncoder = bCryptPasswordEncoder;
 	}
 
 	@Override
 	public User save(UserRegistrationDto registrationDto) {
 		User user = new User(registrationDto.getFirstName(), 
-				registrationDto.getLastName(), registrationDto.getEmail(),
-				passwordEncoder.encode(registrationDto.getPassword()), Arrays.asList(new Role("ROLE_USER")));
+				registrationDto.getLastName(),
+				registrationDto.getEmail(),
+				passwordEncoder.encode(registrationDto.getPassword()),
+				Arrays.asList(new Role("ROLE_USER")));
 
 		return userRepository.save(user);
 	}
@@ -66,10 +69,6 @@ public class UserServiceImpl implements UserService{
 		}
 		return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), mapRolesToAuthorities(user.getRoles()));
 	}
-//	@Override
-//	public User saveWorker(User worker){
-//		return userRepository.save(worker);
-//	}
 
 	@Override
 	public User getWorkerById(long id){
