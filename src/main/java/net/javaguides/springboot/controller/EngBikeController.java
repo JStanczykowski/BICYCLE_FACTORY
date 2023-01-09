@@ -13,15 +13,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
-public class TechBikeController {
+public class EngBikeController {
     private TasksService tasksService;
 
     private BikeService bikeService;
     private final TasksRepo tasksRepo;
 
-    public TechBikeController(TasksService tasksService,
+    public EngBikeController(TasksService tasksService,
                              BikeService bikeService,
-                              TasksRepo tasksRepo){this.tasksService =tasksService;
+                             TasksRepo tasksRepo){this.tasksService =tasksService;
 
         this.bikeService = bikeService;
         this.tasksRepo = tasksRepo;
@@ -46,10 +46,20 @@ public class TechBikeController {
         task.setOrderNumber(Math.toIntExact(id));
         tasksService.save(task);
         Bike bike= bikeService.getBike(id);
-        bike.setActive(false);
+        bike.setActive("Przyjety do realizacji");
         bikeService.updateBike(bike);
         model.addAttribute("task",task.getOrderNumber());
         model.addAttribute("task",task);
         return "add_bike";
+    }
+    @PostMapping("/technic/{id}")
+    public String saveTask(@PathVariable Long id,@ModelAttribute("technic") Tasks tasks,@ModelAttribute("bike") Bike bik) {
+        Tasks obj = tasksService.getTaskById(id);
+        obj.setDone(true);
+        Bike bike = bikeService.getBikeById(obj.getOrderNumber());
+        bike.setActive("Utworzony");
+        bikeService.updateBike(bike);
+        tasksService.updateTask(obj);
+        return "redirect:/technic";
     }
 }

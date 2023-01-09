@@ -1,13 +1,12 @@
 package net.javaguides.springboot.controller;
 
+import net.javaguides.springboot.adapter.AdapterImpl;
+import net.javaguides.springboot.adapter.Price;
 import net.javaguides.springboot.decorator.BikeInterface;
-import net.javaguides.springboot.decorator.BikeWithBlotnik;
-import net.javaguides.springboot.decorator.BikeWithRabat;
+import net.javaguides.springboot.decorator.BikeWithFS;
+import net.javaguides.springboot.decorator.BikeWithHT;
 import net.javaguides.springboot.model.Bike;
-import net.javaguides.springboot.model.Tasks;
-import net.javaguides.springboot.model.User;
 import net.javaguides.springboot.service.BikeService;
-import net.javaguides.springboot.web.dto.UserRegistrationDto;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -20,8 +19,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 @Controller
 public class UserController {
@@ -42,7 +39,7 @@ public class UserController {
     }
     @PostMapping("/client")
     public String saveBike(@ModelAttribute("bike") Bike bike){
-        bike.setActive(true);
+        bike.setActive("Niepotwierdzone");
         Random random = new Random();
         int serial=random.nextInt(500)+1;
         for(int i=0;i<bikeService.getAllBikes().size();i++) {
@@ -54,7 +51,7 @@ public class UserController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         bike.setNumberOwner(auth.getName());
         bike.setSerialNumber(serial);
-
+        bike.setPrice(1000);
         bikeService.saveBike(bike);
         return "redirect:/client";
     }
@@ -71,14 +68,43 @@ public class UserController {
         model.addAttribute("bike",lista);
         return "bike_list";
     }
-    @GetMapping("/client/list/{id}")
+    @GetMapping("/client/list/blotnik/{id}")
     public String blotnik(@PathVariable Long id, @ModelAttribute("bike") Bike bike){
         Bike obj = bikeService.getBikeById(id);
-        BikeInterface bikeInterface = new BikeWithBlotnik(obj);
+        if(obj.getActive()=="Niepotwierdzone") {
+        BikeInterface bikeInterface = new BikeWithFS(obj);
 
         bikeInterface.dodaj();
 
-        bikeService.updateBike(obj);
+        bikeService.updateBike(obj);}
+        return "redirect:/client/list";
+    }
+    @GetMapping("/client/list/swiatla/{id}")
+    public String swiatla(@PathVariable Long id, @ModelAttribute("bike") Bike bike){
+        Bike obj = bikeService.getBikeById(id);
+        if(obj.getActive()=="Niepotwierdzone") {
+            BikeInterface bikeInterface = new BikeWithHT(obj);
+
+            bikeInterface.dodaj();
+
+            bikeService.updateBike(obj);
+        }
+        return "redirect:/client/list";
+    }
+    @GetMapping("/client/list/order/{id}")
+    public String orderek(@PathVariable Long id, @ModelAttribute("bike") Bike bike) {
+        Bike bik = bikeService.getBikeById(id);
+        bik.setActive("Zamowiony");
+
+        bikeService.updateBike(bik);
+        return "redirect:/client/list";
+    }
+    @GetMapping("/client/list/change/{id}")
+    public String change(@PathVariable Long id, @ModelAttribute("bike") Bike bike) {
+        Bike bik = bikeService.getBikeById(id);
+       Price price = new AdapterImpl(bik);
+        bik.setPrice(price.getPriceInt());
+        bikeService.updateBike(bik);
         return "redirect:/client/list";
     }
 }

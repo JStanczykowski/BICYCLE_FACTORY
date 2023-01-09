@@ -42,14 +42,7 @@ public class TechnicController {
         model.addAttribute("technic", tasksService.getTaskById(id));
         return "instruction";
     }
-    @PostMapping("/technic/{id}")
-    public String saveTask(@PathVariable Long id,@ModelAttribute("technic") Tasks tasks) {
-        Tasks obj = tasksService.getTaskById(id);
-        obj.setDone(true);
 
-        tasksService.updateTask(obj);
-        return "redirect:/technic";
-    }
 
 
 

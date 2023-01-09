@@ -28,13 +28,13 @@ public class Bike implements BikeInterface {
     }
 
     @Column(name="active")
-    private Boolean active;
+    private String active;
 
-    public Boolean getActive() {
+    public String getActive() {
         return active;
     }
 
-    public void setActive(Boolean active) {
+    public void setActive(String active) {
         this.active = active;
     }
 
@@ -42,7 +42,7 @@ public class Bike implements BikeInterface {
         private String color;
 
         @Column(name = "price")
-        private int price;
+        private double price;
 
         @Column(name = "addextend")
         private String addextend;
@@ -53,11 +53,11 @@ public class Bike implements BikeInterface {
 //        @JoinColumn(name = "order_id", nullable = false)
 //        private Orders orders;
 
-    public int getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
@@ -73,7 +73,7 @@ public class Bike implements BikeInterface {
 
         }
 
-        public Bike(int serialNumber, String bikeType, String size, String color, int price,String numberOwner) {
+        public Bike(int serialNumber, String bikeType, String size, String color, double price,String numberOwner) {
             this.serialNumber = serialNumber;
             this.bikeType = bikeType;
             this.size = size;

@@ -1,7 +1,9 @@
 package net.javaguides.springboot.bike;
 
+import net.javaguides.springboot.adapter.AdapterImpl;
+import net.javaguides.springboot.adapter.Price;
 import net.javaguides.springboot.decorator.BikeInterface;
-import net.javaguides.springboot.decorator.BikeWithBlotnik;
+import net.javaguides.springboot.decorator.BikeWithFS;
 import net.javaguides.springboot.decorator.BikeWithRabat;
 import net.javaguides.springboot.model.Bike;
 import net.javaguides.springboot.model.Orders;
@@ -91,7 +93,7 @@ public class BikeTest {
                 setSize("size").
                 setColor("color").
                 build();
-        BikeInterface bikeInterface = new BikeWithBlotnik(bike);
+        BikeInterface bikeInterface = new BikeWithFS(bike);
 
         bikeInterface.dodaj();
         ordersService.saveOrder(orders);
@@ -121,5 +123,17 @@ public class BikeTest {
         List<Bike> all = bikeRepository.findAll();
 
         assertThat(all.contains(bike));
+    }
+    @Test
+    void adapter(){
+        Bike bike = new Bike.BikeEntityBuilder().
+                setSerialNumber("sa").
+                setBikeType("type").
+                setSize("size").
+                setColor("color").
+                setPrice(1000).
+                build();
+        Price euro = new AdapterImpl(bike);
+        System.out.println(euro);
     }
 }
