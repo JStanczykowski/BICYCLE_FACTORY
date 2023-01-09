@@ -11,7 +11,7 @@ public class Tasks {
     private Long id;
 
     @Column(name = "orderNumber")
-    private String orderNumber;
+    private int orderNumber;
     @Column(name="time")
     private String time;
     @Column(name="instruction")
@@ -32,8 +32,11 @@ public class Tasks {
     private TypeTask type;
     public Tasks() {
     }
-
-    public Tasks(Long id, String orderNumber, String time, String instruction, Boolean done, TypeTask type) {
+    public Tasks(int orderNumber,Boolean done){
+        this.orderNumber=orderNumber;
+        this.done = done;
+    }
+    public Tasks(Long id, int orderNumber, String time, String instruction, Boolean done, TypeTask type) {
         this.id = id;
         this.orderNumber = orderNumber;
         this.time = time;
@@ -66,11 +69,11 @@ public class Tasks {
         this.id = id;
     }
 
-    public String getOrderNumber() {
+    public int getOrderNumber() {
         return orderNumber;
     }
 
-    public void setOrderNumber(String orderNumber) {
+    public void setOrderNumber(int orderNumber) {
         this.orderNumber = orderNumber;
     }
 

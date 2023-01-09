@@ -15,5 +15,5 @@ public interface TasksService {
         Tasks getTaskById(long id);
         Tasks updateTask(Tasks tasks);
         void deleteTaskById(long id);
-        void doSomething(TypeTask typeTask, Object o);
+//        void doSomething(TypeTask typeTask, Object o);
 }

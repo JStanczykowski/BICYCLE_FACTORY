@@ -1,7 +1,5 @@
 package net.javaguides.springboot.service;
 
-import net.javaguides.springboot.Component.Create;
-import net.javaguides.springboot.Component.TypeTaskFactory;
 import net.javaguides.springboot.model.Tasks;
 import net.javaguides.springboot.model.TypeTask;
 import net.javaguides.springboot.repository.TasksRepo;
@@ -17,16 +15,16 @@ public class TasksServiceImpl implements TasksService{
     @Autowired
     private TasksRepo tasksRepo;
 
-    private final TypeTaskFactory typeTaskFactory;
+
     @Autowired
-    public TasksServiceImpl(TasksRepo tasksRepo, TypeTaskFactory typeTaskFactory) {
+    public TasksServiceImpl(TasksRepo tasksRepo ) {
         super();
         this.tasksRepo = tasksRepo;
-        this.typeTaskFactory = typeTaskFactory;
+//        this.typeTaskFactory = typeTaskFactory;
     }
     @Override
     public Tasks save(Tasks tasks) {
-        return null;
+        return tasksRepo.save(tasks);
     }
 
     @Override
@@ -45,14 +43,14 @@ public class TasksServiceImpl implements TasksService{
     public void deleteTaskById(long id){
         tasksRepo.deleteById(id);
     }
-    @Override
-    public void doSomething(TypeTask typeTask, Object o) {
-        typeTaskFactory.getType(typeTask).doSomething(o);
-    }
+//    @Override
+//    public void doSomething(TypeTask typeTask, Object o) {
+//        typeTaskFactory.getType(typeTask).doSomething(o);
+//    }
 
-    @PostConstruct
-    public void test() {
-        doSomething(TypeTask.create, new Create());
-    }
+//    @PostConstruct
+//    public void test() {
+//        doSomething(TypeTask.create, new Create());
+//    }
 
 }

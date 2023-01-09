@@ -25,6 +25,7 @@ public class MainController {
 	@GetMapping("/index")
 	public String home() {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
 		if(auth.getAuthorities().toString().equals("[MENAGO]"))
 			return "redirect:/worker";
 		else if(auth.getAuthorities().toString().equals("[TECHNIC]"))
@@ -33,6 +34,8 @@ public class MainController {
 			return "redirect:/engineer";
 		else if(auth.getAuthorities().toString().equals("[STOCKMAN]"))
 			return "redirect:/stockman";
+		else if(auth.getAuthorities().toString().equals("[ROLE_USER]"))
+			return "redirect:/client";
 		else
 			return "index";
 

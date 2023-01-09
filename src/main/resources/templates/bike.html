@@ -32,7 +32,10 @@
             <th> bikeType</th>
             <th> size</th>
             <th> color</th>
+            <th> Addextend</th>
+            <th> Active</th>
             <th> Action</th>
+
         </tr>
         </thead>
         <tbody >
@@ -41,6 +44,8 @@
             <td th:text = "${bik.bikeType}"></td>
             <td th:text = "${bik.size}"></td>
             <td th:text = "${bik.color}"></td>
+            <td th:text = "${bik.addextend}"></td>
+            <td th:text = "${bik.active}"></td>
             <td>
             <a th:href = "@{/engineer/bike/{id}(id=${bik.id})}"
                class="btn btn-dark">Create task</a>

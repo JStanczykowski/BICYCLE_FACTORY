@@ -1,6 +1,6 @@
 package net.javaguides.springboot.controller;
 
-import net.javaguides.springboot.Component.TypeTaskFactory;
+
 import net.javaguides.springboot.model.Part;
 import net.javaguides.springboot.service.PartService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +14,7 @@ public class PartController {
     private final PartService partService;
 
     @Autowired
-    public PartController(PartService partService, TypeTaskFactory typeTaskFactory) {
+    public PartController(PartService partService) {
         this.partService = partService;
     }
     @GetMapping("")

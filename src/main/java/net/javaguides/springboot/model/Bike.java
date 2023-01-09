@@ -13,16 +13,32 @@ public class Bike implements BikeInterface {
         private Long id;
 
         @Column(name = "serialNumber")
-        private String serialNumber;
-
+        private int serialNumber;
+        @Column(name = "numberOwner")
+        private String numberOwner;
         @Column(name = "bikeType")
         private String bikeType;
+
+    public String getNumberOwner() {
+        return numberOwner;
+    }
+
+    public void setNumberOwner(String numberOwner) {
+        this.numberOwner = numberOwner;
+    }
 
     @Column(name="active")
     private Boolean active;
 
+    public Boolean getActive() {
+        return active;
+    }
 
-        @Column(name = "color")
+    public void setActive(Boolean active) {
+        this.active = active;
+    }
+
+    @Column(name = "color")
         private String color;
 
         @Column(name = "price")
@@ -31,9 +47,11 @@ public class Bike implements BikeInterface {
         @Column(name = "addextend")
         private String addextend;
 
-        @ManyToOne(cascade = CascadeType.ALL, optional = false)
-        @JoinColumn(name = "order_id", nullable = false)
-        private Orders orders;
+        @Column(name = "size")
+        private String size;
+//        @ManyToOne(cascade = CascadeType.ALL, optional = false)
+//        @JoinColumn(name = "order_id", nullable = false)
+//        private Orders orders;
 
     public int getPrice() {
         return price;
@@ -55,12 +73,12 @@ public class Bike implements BikeInterface {
 
         }
 
-        public Bike(String serialNumber, String bikeType, String size, String color, Orders orders, int price) {
+        public Bike(int serialNumber, String bikeType, String size, String color, int price,String numberOwner) {
             this.serialNumber = serialNumber;
             this.bikeType = bikeType;
             this.size = size;
             this.color = color;
-            this.orders = orders;
+            this.numberOwner = numberOwner;
             this.price = price;
         }
 
@@ -78,7 +96,8 @@ public class Bike implements BikeInterface {
 
             private int price;
 
-            private String addextend;
+
+        private String addextend;
 
             public BikeEntityBuilder() {
 
@@ -116,11 +135,11 @@ public class Bike implements BikeInterface {
 
             public Bike build() {
                 Bike bike = new Bike();
-                bike.serialNumber = this.serialNumber;
+                bike.serialNumber = Integer.parseInt(this.serialNumber);
                 bike.bikeType = this.bikeType;
                 bike.size = size;
                 bike.color = color;
-                bike.orders = orders;
+
                 bike.price = price;
                 bike.addextend = addextend;
                 return bike;
@@ -130,7 +149,7 @@ public class Bike implements BikeInterface {
             return id;
         }
 
-        public String getSerialNumber() {
+        public int getSerialNumber() {
             return serialNumber;
         }
 
@@ -146,15 +165,13 @@ public class Bike implements BikeInterface {
             return color;
         }
 
-        public Orders getOrders() {
-            return orders;
-        }
+
 
         public void setId(Long id) {
             this.id = id;
         }
 
-        public void setSerialNumber(String serialNumber) {
+        public void setSerialNumber(int serialNumber) {
             this.serialNumber = serialNumber;
         }
 
@@ -170,8 +187,6 @@ public class Bike implements BikeInterface {
             this.color = color;
         }
 
-        public void setOrders(Orders orders) {
-            this.orders = orders;
-        }
+
 
 }
