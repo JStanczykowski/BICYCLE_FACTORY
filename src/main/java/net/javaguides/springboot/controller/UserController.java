@@ -28,7 +28,7 @@ public class UserController {
         this.bikeService = bikeService;
     }
     @GetMapping("/client")
-    public String show(Model model){
+    public String show(){
         return "client";
     }
     @GetMapping("/client/new")
@@ -59,9 +59,9 @@ public class UserController {
     @GetMapping("/client/list")
     public String listBike(Model model){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        List<Bike> lista = new ArrayList<Bike>();
+        List<Bike> lista = new ArrayList<>();
         for(int i=0;i<bikeService.getAllBikes().size();i++) {
-            if(bikeService.getAllBikes().get(i).getNumberOwner()==auth.getName()){
+            if(bikeService.getAllBikes().get(i).getNumberOwner().equals(auth.getName())){
                 lista.add(bikeService.getAllBikes().get(i));
             }
         }
@@ -71,18 +71,18 @@ public class UserController {
     @GetMapping("/client/list/blotnik/{id}")
     public String blotnik(@PathVariable Long id, @ModelAttribute("bike") Bike bike){
         Bike obj = bikeService.getBikeById(id);
-        if(obj.getActive()=="Niepotwierdzone") {
+      //  if(obj.getActive()=="Niepotwierdzone") {
         BikeInterface bikeInterface = new BikeWithFS(obj);
 
         bikeInterface.dodaj();
 
-        bikeService.updateBike(obj);}
+        bikeService.updateBike(obj);//}
         return "redirect:/client/list";
-    }
+   }
     @GetMapping("/client/list/swiatla/{id}")
     public String swiatla(@PathVariable Long id, @ModelAttribute("bike") Bike bike){
         Bike obj = bikeService.getBikeById(id);
-        if(obj.getActive()=="Niepotwierdzone") {
+        if("Niepotwierdzone".equals(obj.getActive())) {
             BikeInterface bikeInterface = new BikeWithHT(obj);
 
             bikeInterface.dodaj();

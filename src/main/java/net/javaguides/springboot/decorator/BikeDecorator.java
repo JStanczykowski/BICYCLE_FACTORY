@@ -2,7 +2,7 @@ package net.javaguides.springboot.decorator;
 
 import net.javaguides.springboot.model.Bike;
 
-public abstract class BikeDecorator extends Bike {
+public abstract class BikeDecorator implements BikeInterface {
     protected Bike bike;
 
     public BikeDecorator(Bike bike) {

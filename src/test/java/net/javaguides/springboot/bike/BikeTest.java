@@ -50,7 +50,7 @@ public class BikeTest {
         LocalDate localDate = LocalDate.now();
         Orders orders = new Orders("blabla", localDate);
         Bike bike = new Bike.BikeEntityBuilder().
-                setSerialNumber("sa").
+                setSerialNumber(6).
                 setBikeType("type").
                 setSize("size").
                 setColor("color").
@@ -69,7 +69,7 @@ public class BikeTest {
         Orders orders = new Orders("blabla", localDate);
         Bike bike = new Bike.
                 BikeEntityBuilder().
-                setSerialNumber("sa").
+                setSerialNumber(5).
                 setBikeType("type").
                 setSize("size").
                 setColor("color").
@@ -88,7 +88,7 @@ public class BikeTest {
         LocalDate localDate = LocalDate.now();
         Orders orders = new Orders("blabla", localDate);
         Bike bike = new Bike.BikeEntityBuilder().
-                setSerialNumber("sa").
+                setSerialNumber(5).
                 setBikeType("type").
                 setSize("size").
                 setColor("color").
@@ -108,7 +108,7 @@ public class BikeTest {
         LocalDate localDate = LocalDate.now();
         Orders orders = new Orders("blabla", localDate);
         Bike bike = new Bike.BikeEntityBuilder().
-                setSerialNumber("sa").
+                setSerialNumber(5).
                 setBikeType("type").
                 setSize("size").
                 setColor("color").
@@ -127,7 +127,7 @@ public class BikeTest {
     @Test
     void adapter(){
         Bike bike = new Bike.BikeEntityBuilder().
-                setSerialNumber("sa").
+                setSerialNumber(5).
                 setBikeType("type").
                 setSize("size").
                 setColor("color").

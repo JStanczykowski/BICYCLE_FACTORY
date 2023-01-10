@@ -88,7 +88,7 @@ public class Bike implements BikeInterface {
     }
 
     public static class BikeEntityBuilder {
-            private String serialNumber;
+            private int serialNumber;
             private String bikeType;
             private String size;
             private String color;
@@ -103,7 +103,7 @@ public class Bike implements BikeInterface {
 
             }
 
-            public BikeEntityBuilder setSerialNumber(String serialNumber) {
+            public BikeEntityBuilder setSerialNumber(int serialNumber) {
                 this.serialNumber = serialNumber;
                 return this;
             }
@@ -135,7 +135,7 @@ public class Bike implements BikeInterface {
 
             public Bike build() {
                 Bike bike = new Bike();
-                bike.serialNumber = Integer.parseInt(this.serialNumber);
+                bike.serialNumber = this.serialNumber;
                 bike.bikeType = this.bikeType;
                 bike.size = size;
                 bike.color = color;
