@@ -1,7 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymealeaf.org"
+<html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
-
 <head>
   <meta charset="ISO-8859-1">
   <title>Technic</title>
@@ -25,11 +24,15 @@
   </div>
 
   <br>
+  <div class = "col-lg-3"><br>
+  <a th:href = "@{/client/list/current}" class = "btn btn-outline-success"> Change another current</a><br>
+</div>
   <table class="table table-hover" th:action="@{/client/list}">
     <thead class = "table-dark">
     <tr>
       <th> Zamowiony</th>
-      <th> serialNumber</th>
+      <th> Price</th>
+      <th> Another </th>
       <th> bikeType</th>
       <th> size</th>
       <th> color</th>
@@ -43,7 +46,8 @@
     <tbody >
     <tr th:each = "bik: ${bike}">
       <td th:text = "${bik.active}"></td>
-      <td th:text = "${bik.serialNumber}"></td>
+      <td th:text = "${bik.price}+ 'PLN'"></td>
+      <td th:text = "${bik.anotherPrice}"></td>
       <td th:text = "${bik.bikeType}"></td>
       <td th:text = "${bik.size}"></td>
       <td th:text = "${bik.color}"></td>

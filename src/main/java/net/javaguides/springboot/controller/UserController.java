@@ -6,6 +6,8 @@ import net.javaguides.springboot.decorator.BikeInterface;
 import net.javaguides.springboot.decorator.BikeWithFS;
 import net.javaguides.springboot.decorator.BikeWithHT;
 import net.javaguides.springboot.model.Bike;
+import net.javaguides.springboot.model.current;
+import net.javaguides.springboot.responsibility.ChangeEuro;
 import net.javaguides.springboot.service.BikeService;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -56,12 +58,57 @@ public class UserController {
         return "redirect:/client";
     }
 
+    @GetMapping("/client/list/current")
+    public String current(Model model){
+//        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+//        List<Bike> lista = new ArrayList<>();
+//
+//        for(int i=0;i<bikeService.getAllBikes().size();i++) {
+//            if(bikeService.getAllBikes().get(i).getNumberOwner().equals(auth.getName())){
+//
+//                lista.add(bikeService.getAllBikes().get(i));
+//
+//            }
+//        }
+        Bike bike = new Bike();
+        model.addAttribute("bike", bike);
+        return "currentWeb";
+    }
+    @PostMapping("/client/list/current")
+    public String saveCurrent(@ModelAttribute("bike") Bike bike){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+        for(int i=0;i<bikeService.getAllBikes().size();i++) {
+            if(bikeService.getAllBikes().get(i).getNumberOwner().equals(auth.getName())){
+                current cur = new current();
+               Bike bik= bikeService.getAllBikes().get(i);
+               bik.setCurrentValue(bike.getCurrentValue());
+               ChangeEuro changeEuro = new ChangeEuro();
+               if(bike.getCurrentValue().equals("USD"))
+               cur.setCurre(4.34);
+                if(bike.getCurrentValue().equals("CAD"))
+                    cur.setCurre(3.24);
+
+                bik.setAnotherCurrent(changeEuro.euroPLN(cur,bik),bike.getCurrentValue());
+
+                bikeService.updateBike(bik);
+
+            }
+        }
+
+        return "redirect:/client/list";
+    }
     @GetMapping("/client/list")
     public String listBike(Model model){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         List<Bike> lista = new ArrayList<>();
         for(int i=0;i<bikeService.getAllBikes().size();i++) {
             if(bikeService.getAllBikes().get(i).getNumberOwner().equals(auth.getName())){
+                ChangeEuro changeEuro = new ChangeEuro();
+                current cur = new current(2);
+                String waluta = "EUR";
+                Bike bik = bikeService.getAllBikes().get(i);
+               // bik.setAnotherCurrent(changeEuro.euroPLN(cur,bik),waluta);
                 lista.add(bikeService.getAllBikes().get(i));
             }
         }
@@ -71,12 +118,13 @@ public class UserController {
     @GetMapping("/client/list/blotnik/{id}")
     public String blotnik(@PathVariable Long id, @ModelAttribute("bike") Bike bike){
         Bike obj = bikeService.getBikeById(id);
-      //  if(obj.getActive()=="Niepotwierdzone") {
+        if("Niepotwierdzone".equals(obj.getActive())) {
         BikeInterface bikeInterface = new BikeWithFS(obj);
 
         bikeInterface.dodaj();
 
-        bikeService.updateBike(obj);//}
+        bikeService.updateBike(obj);
+        }
         return "redirect:/client/list";
    }
     @GetMapping("/client/list/swiatla/{id}")

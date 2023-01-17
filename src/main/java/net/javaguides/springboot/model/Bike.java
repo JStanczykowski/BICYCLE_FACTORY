@@ -18,6 +18,16 @@ public class Bike implements BikeInterface {
         private String numberOwner;
         @Column(name = "bikeType")
         private String bikeType;
+        @Column(name = "anotherPrice")
+        private String anotherPrice;
+
+    public String getAnotherPrice() {
+        return anotherPrice;
+    }
+
+    public void setAnotherPrice(String anotherPrice) {
+        this.anotherPrice = anotherPrice;
+    }
 
     public String getNumberOwner() {
         return numberOwner;
@@ -47,11 +57,25 @@ public class Bike implements BikeInterface {
         @Column(name = "addextend")
         private String addextend;
 
+        @Column(name = "currentValue")
+        private String currentValue;
         @Column(name = "size")
         private String size;
 //        @ManyToOne(cascade = CascadeType.ALL, optional = false)
 //        @JoinColumn(name = "order_id", nullable = false)
 //        private Orders orders;
+
+    public void setAnotherCurrent(String value, String currentt){
+
+        setAnotherPrice(value+currentt);
+    }
+    public String getCurrentValue() {
+        return currentValue;
+    }
+
+    public void setCurrentValue(String currentValue) {
+        this.currentValue = currentValue;
+    }
 
     public double getPrice() {
         return price;
@@ -72,7 +96,9 @@ public class Bike implements BikeInterface {
     public Bike() {
 
         }
+    public void changeCurrent(current cur,String name){
 
+    }
         public Bike(int serialNumber, String bikeType, String size, String color, double price,String numberOwner) {
             this.serialNumber = serialNumber;
             this.bikeType = bikeType;
@@ -93,6 +119,7 @@ public class Bike implements BikeInterface {
             private String size;
             private String color;
             private Orders orders;
+            private String current;
 
             private int price;
 
@@ -103,7 +130,14 @@ public class Bike implements BikeInterface {
 
             }
 
-            public BikeEntityBuilder setSerialNumber(int serialNumber) {
+
+
+        public BikeEntityBuilder setCurrentValue(String currentValue) {
+            this.current = currentValue;
+            return this;
+        }
+
+        public BikeEntityBuilder setSerialNumber(int serialNumber) {
                 this.serialNumber = serialNumber;
                 return this;
             }
@@ -139,7 +173,7 @@ public class Bike implements BikeInterface {
                 bike.bikeType = this.bikeType;
                 bike.size = size;
                 bike.color = color;
-
+                bike.currentValue = current;
                 bike.price = price;
                 bike.addextend = addextend;
                 return bike;
@@ -159,6 +193,9 @@ public class Bike implements BikeInterface {
 
         public String getSize() {
             return size;
+        }
+        public String getCurrent() {
+            return currentValue;
         }
 
         public String getColor() {

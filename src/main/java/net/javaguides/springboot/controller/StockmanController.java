@@ -35,7 +35,7 @@ public class StockmanController {
         return "edit_stockman";
     }
     @PostMapping("/stockman/{id}")
-    public String updatePart(@PathVariable Long id, @ModelAttribute("part") Part part, Model model){
+    public String updatePart(@PathVariable Long id, @ModelAttribute("part") Part part){
         Part existingPart = partService.getPartById(id);
 
         existingPart.setIlosc(part.getIlosc());
