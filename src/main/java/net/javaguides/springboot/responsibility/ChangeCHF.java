@@ -3,20 +3,19 @@ package net.javaguides.springboot.responsibility;
 import net.javaguides.springboot.model.Bike;
 import net.javaguides.springboot.model.current;
 
-public class ChangeEuro extends Change{
+public class ChangeCHF extends Change{
 
 
-    public ChangeEuro(){
+    public ChangeCHF(){
 
     }
 
     @Override
-    public String euroPLN(current cur,Bike bike){
+    public String chfPLN(current cur, Bike bike){
         double resul =bike.getPrice() / cur.getCurre();
         resul*=100;
         resul=Math.round(resul);
         resul/=100;
-       return String.valueOf(resul);
-   }
-
+        return String.valueOf(resul);
+    }
 }

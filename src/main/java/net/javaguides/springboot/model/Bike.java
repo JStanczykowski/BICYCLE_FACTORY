@@ -65,9 +65,9 @@ public class Bike implements BikeInterface {
 //        @JoinColumn(name = "order_id", nullable = false)
 //        private Orders orders;
 
-    public void setAnotherCurrent(String value, String currentt){
+    public void setAnotherCurrent(String value){
 
-        setAnotherPrice(value+currentt);
+        setAnotherPrice(value+getCurrent());
     }
     public String getCurrentValue() {
         return currentValue;

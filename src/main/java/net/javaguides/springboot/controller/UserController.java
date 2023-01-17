@@ -7,7 +7,10 @@ import net.javaguides.springboot.decorator.BikeWithFS;
 import net.javaguides.springboot.decorator.BikeWithHT;
 import net.javaguides.springboot.model.Bike;
 import net.javaguides.springboot.model.current;
+import net.javaguides.springboot.responsibility.ChangeCAD;
+import net.javaguides.springboot.responsibility.ChangeCHF;
 import net.javaguides.springboot.responsibility.ChangeEuro;
+import net.javaguides.springboot.responsibility.ChangeUSD;
 import net.javaguides.springboot.service.BikeService;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -84,12 +87,25 @@ public class UserController {
                Bike bik= bikeService.getAllBikes().get(i);
                bik.setCurrentValue(bike.getCurrentValue());
                ChangeEuro changeEuro = new ChangeEuro();
-               if(bike.getCurrentValue().equals("USD"))
-               cur.setCurre(4.34);
-                if(bike.getCurrentValue().equals("CAD"))
-                    cur.setCurre(3.24);
-
-                bik.setAnotherCurrent(changeEuro.euroPLN(cur,bik),bike.getCurrentValue());
+                ChangeCAD changeCAD = new ChangeCAD();
+                ChangeCHF changeCHF = new ChangeCHF();
+                ChangeUSD changeUSD = new ChangeUSD();
+               if(bike.getCurrentValue().equals("USD")) {
+                   cur.setCurre(4.35);
+                   bik.setAnotherCurrent(changeUSD.usdPLN(cur,bik));
+               }
+                if(bike.getCurrentValue().equals("CAD")) {
+                    cur.setCurre(3.25);
+                    bik.setAnotherCurrent(changeCAD.cadPLN(cur,bik));
+                }
+                if(bike.getCurrentValue().equals("EUR")) {
+                    cur.setCurre(4.7);
+                    bik.setAnotherCurrent(changeEuro.euroPLN(cur,bik));
+                }
+                if(bike.getCurrentValue().equals("CHF")) {
+                    cur.setCurre(4.72);
+                    bik.setAnotherCurrent(changeCHF.chfPLN(cur,bik));
+                }
 
                 bikeService.updateBike(bik);
 
@@ -104,11 +120,7 @@ public class UserController {
         List<Bike> lista = new ArrayList<>();
         for(int i=0;i<bikeService.getAllBikes().size();i++) {
             if(bikeService.getAllBikes().get(i).getNumberOwner().equals(auth.getName())){
-                ChangeEuro changeEuro = new ChangeEuro();
-                current cur = new current(2);
-                String waluta = "EUR";
-                Bike bik = bikeService.getAllBikes().get(i);
-               // bik.setAnotherCurrent(changeEuro.euroPLN(cur,bik),waluta);
+
                 lista.add(bikeService.getAllBikes().get(i));
             }
         }

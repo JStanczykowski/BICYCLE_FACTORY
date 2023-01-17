@@ -35,6 +35,7 @@
             <th> Addextend</th>
             <th> Active</th>
             <th> Action</th>
+            <th> Reject</th>
 
         </tr>
         </thead>
@@ -49,6 +50,10 @@
             <td>
             <a th:href = "@{/engineer/bike/{id}(id=${bik.id})}"
                class="btn btn-dark">Create task</a>
+            </td>
+            <td>
+                <a th:href = "@{/engineer/bike/reject/{id}(id=${bik.id})}"
+                   class="btn btn-outline-danger">Reject bike</a>
             </td>
         </tr>
         </tbody>

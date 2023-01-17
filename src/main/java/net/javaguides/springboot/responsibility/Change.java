@@ -18,25 +18,17 @@ public abstract class Change implements ChangeInterface {
         String wynik="0";
         return wynik;
     }
-    public String PLNeuro(){
+    public String usdPLN(current cur, Bike bike){
         String wynik="0";
         return wynik;
     }
-    public void euroUSD(){
-        double wynik=0;
-        this.bike.setPrice(wynik);
+    public String chfPLN(current cur, Bike bike){
+        String wynik="0";
+        return wynik;
     }
-    public void USDeuro(){
-        double wynik=0;
-        this.bike.setPrice(wynik);
-    }
-    public void PLNusd(){
-        double wynik=0;
-        this.bike.setPrice(wynik);
-    }
-    public void usdPLN(){
-        double wynik=0;
-        this.bike.setPrice(wynik);
+    public String cadPLN(current cur, Bike bike){
+        String wynik="0";
+        return wynik;
     }
 
 }

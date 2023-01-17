@@ -5,9 +5,8 @@ import net.javaguides.springboot.model.current;
 
 public interface ChangeInterface {
     String euroPLN(current cur, Bike bike);
-    String PLNeuro();
-    void euroUSD();
-    void USDeuro();
-    void PLNusd();
-    void usdPLN();
+    String usdPLN(current cur, Bike bike);
+    String cadPLN(current cur, Bike bike);
+    String chfPLN(current cur, Bike bike);
+
 }

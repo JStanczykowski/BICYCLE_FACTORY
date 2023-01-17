@@ -52,6 +52,13 @@ public class EngBikeController {
         model.addAttribute("task",task);
         return "add_bike";
     }
+    @GetMapping("/engineer/bike/reject/{id}")
+    public String rejectBike( @PathVariable Long id){
+        Bike bik = bikeService.getBikeById(id);
+        bik.setActive("Odrzucony");
+        bikeService.updateBike(bik);
+        return "redirect:/engineer/bike";
+    }
     @PostMapping("/technic/{id}")
     public String saveTask(@PathVariable Long id,@ModelAttribute("technic") Tasks tasks,@ModelAttribute("bike") Bike bik) {
         Tasks obj = tasksService.getTaskById(id);
@@ -62,4 +69,5 @@ public class EngBikeController {
         tasksService.updateTask(obj);
         return "redirect:/technic";
     }
+
 }
