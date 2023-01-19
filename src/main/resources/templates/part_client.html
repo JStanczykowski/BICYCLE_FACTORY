@@ -11,7 +11,7 @@
 </head>
 <body>
 <nav class="navbar navbar-expand-md bg-dark navbar-dark">
-  <a class="navbar-brand" th:href="@{/engineer}">Engineer system</a>
+  <a class="navbar-brand" th:href="@{/client}">Client system</a>
 
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
     <span class="navbar-toggler-icon"></span>
@@ -21,15 +21,34 @@
 
 <div class ="container">
   <div class = "row" >
-    <h1 > Engineer select  </h1>
+    <h1 > Parts List  </h1>
   </div>
 
   <br>
-  <div><button type="button" class="btn btn-primary btn-lg">
-    <a th:href="@{/engineer/part}" style="color:white;">Part list</a></button>
+  <table class="table table-hover" th:action="@{/client/part}">
+    <thead class = "table-dark">
+    <tr>
+      <th> partName</th>
+      <th> partProducer</th>
+      <th> ilosc</th>
+      <th> status</th>
 
-  <button type="button" class="btn btn-primary btn-lg">
-    <a th:href="@{/engineer/bike}" style="color:white;">Bike list</a></button>
+    </tr>
+    </thead>
+    <tbody >
+    <tr th:each = "engine: ${part}">
+      <td th:text = "${engine.partName}"></td>
+      <td th:text = "${engine.partProducer}"></td>
+      <td th:text = "${engine.ilosc}"></td>
+      <td th:text = "${engine.statusOrder}"></td><td>
+
+      <td>
+    </tr>
+    </tbody>
+  </table>
+  <div>
+
+
   </div>
 </div>
 </body>

@@ -6,6 +6,7 @@ import net.javaguides.springboot.decorator.BikeInterface;
 import net.javaguides.springboot.decorator.BikeWithFS;
 import net.javaguides.springboot.decorator.BikeWithHT;
 import net.javaguides.springboot.model.Bike;
+import net.javaguides.springboot.model.Part;
 import net.javaguides.springboot.model.current;
 import net.javaguides.springboot.responsibility.ChangeCAD;
 import net.javaguides.springboot.responsibility.ChangeCHF;
@@ -63,16 +64,6 @@ public class UserController {
 
     @GetMapping("/client/list/current")
     public String current(Model model){
-//        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-//        List<Bike> lista = new ArrayList<>();
-//
-//        for(int i=0;i<bikeService.getAllBikes().size();i++) {
-//            if(bikeService.getAllBikes().get(i).getNumberOwner().equals(auth.getName())){
-//
-//                lista.add(bikeService.getAllBikes().get(i));
-//
-//            }
-//        }
         Bike bike = new Bike();
         model.addAttribute("bike", bike);
         return "currentWeb";
@@ -167,4 +158,5 @@ public class UserController {
         bikeService.updateBike(bik);
         return "redirect:/client/list";
     }
+
 }

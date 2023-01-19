@@ -14,9 +14,27 @@ public class Part {
 
     @Column(name = "catalogNumber")
     private int catalogNumber;
-
+    @Column(name = "numberOwner")
+    private String numberOwner;
     @Column(name = "partProducer")
     private String partProducer;
+    @Column(name = "statusOrder")
+    private String statusOrder;
+    public String getNumberOwner() {
+        return numberOwner;
+    }
+
+    public String getStatusOrder() {
+        return statusOrder;
+    }
+
+    public void setStatusOrder(String statusOrder) {
+        this.statusOrder = statusOrder;
+    }
+
+    public void setNumberOwner(String numberOwner) {
+        this.numberOwner = numberOwner;
+    }
 
     @Column(name="ilosc")
     private int ilosc;
