@@ -45,6 +45,49 @@ public class Tasks {
         this.type = type;
     }
 
+    public static class TaskEntityBuilder {
+        private int orderNumber;
+        private String time;
+        private String instruction;
+        private Boolean done;
+        private TypeTask typeTask;
+
+        public TaskEntityBuilder setOrderNumber(int orderNumber) {
+            this.orderNumber = orderNumber;
+            return this;
+        }
+
+        public TaskEntityBuilder setTime(String time) {
+            this.time = time;
+            return this;
+        }
+
+        public TaskEntityBuilder setInstruction(String instruction) {
+            this.instruction = instruction;
+            return this;
+        }
+
+        public TaskEntityBuilder setDone(Boolean done) {
+            this.done = done;
+            return this;
+        }
+
+        public TaskEntityBuilder setTypeTask(TypeTask typeTask) {
+            this.typeTask = typeTask;
+            return this;
+        }
+
+        public Tasks build() {
+            Tasks tasks = new Tasks();
+            tasks.orderNumber = this.orderNumber;
+            tasks.time = this.time;
+            tasks.instruction = this.instruction;
+            tasks.done = this.done;
+            tasks.type = this.typeTask;
+            return tasks;
+        }
+    }
+
     public String getInstruction() {
         return instruction;
     }
