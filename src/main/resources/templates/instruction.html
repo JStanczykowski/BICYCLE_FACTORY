@@ -17,8 +17,27 @@
     <span class="navbar-toggler-icon"></span>
   </button>
   <li sec:authorize="isAuthenticated()"><a th:href="@{/technic}">Back</a></li>
-</nav>
+</nav><br><div>
+<table class ="table table-striped table-dark" th:action="@{/technic/{id}(id=${technic.id})}">
+  <thead class = "table-dark">
+  <tr>
+    <th> Zamowiony</th>
+    <th> bikeType</th>
+    <th> size</th>
+    <th> color</th>
+    <th> Addextend</th>
+  </tr>
+  </thead>
+  <tbody >
+  <tr th:each = "bik: ${bike}">
+    <td th:text = "${bik.active}"></td>
+    <td th:text = "${bik.bikeType}"></td>
+    <td th:text = "${bik.size}"></td>
+    <td th:text = "${bik.color}"></td>
+    <td th:text = "${bik.addextend}"></td>
 
+  </tbody>
+</table></div>
 <form th:action="@{/technic/{id}(id=${technic.id})}" th:object = "${technic}" method="POST">
 <div class ="container">
   <div class = "row" >

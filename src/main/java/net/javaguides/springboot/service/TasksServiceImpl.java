@@ -43,14 +43,6 @@ public class TasksServiceImpl implements TasksService{
     public void deleteTaskById(long id){
         tasksRepo.deleteById(id);
     }
-//    @Override
-//    public void doSomething(TypeTask typeTask, Object o) {
-//        typeTaskFactory.getType(typeTask).doSomething(o);
-//    }
 
-//    @PostConstruct
-//    public void test() {
-//        doSomething(TypeTask.create, new Create());
-//    }
 
 }

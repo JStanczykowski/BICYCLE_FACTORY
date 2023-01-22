@@ -70,4 +70,10 @@ public class EngBikeController {
         return "redirect:/technic";
     }
 
+    @GetMapping("/technic/instruction/{id}")
+    public String InstructionTask(@PathVariable Long id, Model model){
+        model.addAttribute("bike",bikeService.getBike(tasksService.getTaskById(id).getOrderNumber()));
+        model.addAttribute("technic", tasksService.getTaskById(id));
+        return "instruction";
+    }
 }

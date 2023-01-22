@@ -37,11 +37,11 @@ public class TechnicController {
         model.addAttribute("technic", result);
         return "technic";
     }
-    @GetMapping("/technic/instruction/{id}")
-   public String InstructionTask(@PathVariable Long id, Model model){
-        model.addAttribute("technic", tasksService.getTaskById(id));
-        return "instruction";
-    }
+//    @GetMapping("/technic/instruction/{id}")
+//   public String InstructionTask(@PathVariable Long id, Model model){
+//        model.addAttribute("technic", tasksService.getTaskById(id));
+//        return "instruction";
+//    }
 
 
 
