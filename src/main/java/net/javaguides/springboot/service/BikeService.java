@@ -1,6 +1,7 @@
 package net.javaguides.springboot.service;
 
 import net.javaguides.springboot.model.Bike;
+import org.springframework.security.core.Authentication;
 
 import java.util.List;
 
@@ -13,4 +14,5 @@ public interface BikeService {
     Bike updateBike(Bike bike);
     void deleteBikeById(long id);
     Bike getBike(long id);
+    List<Bike> getListBike(Authentication auth, BikeService bikeService);
 }

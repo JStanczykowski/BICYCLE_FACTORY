@@ -3,7 +3,7 @@ package net.javaguides.springboot.responsibility;
 import net.javaguides.springboot.model.Bike;
 import net.javaguides.springboot.model.current;
 
-public class ChangeEuro extends Change{
+public class ChangeEuro implements ChangeInterface{
 
 
     public ChangeEuro(){
@@ -11,12 +11,14 @@ public class ChangeEuro extends Change{
     }
 
     @Override
-    public String euroPLN(current cur,Bike bike){
-        double resul =bike.getPrice() / cur.getCurre();
+    public String change(current cur, double price){
+        double resul =price / cur.getCurre();
         resul*=100;
         resul=Math.round(resul);
         resul/=100;
        return String.valueOf(resul);
    }
+
+
 
 }

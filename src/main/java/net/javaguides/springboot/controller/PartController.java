@@ -1,7 +1,5 @@
 package net.javaguides.springboot.controller;
 
-
-import net.javaguides.springboot.model.Bike;
 import net.javaguides.springboot.model.Part;
 import net.javaguides.springboot.model.status;
 import net.javaguides.springboot.service.PartService;
@@ -14,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 @Controller
 public class PartController {
@@ -35,6 +34,15 @@ public class PartController {
         part.setNumberOwner(auth.getName());
         part.setStat(status.valueOf("more"));
         part.setStatusOrder("Zamowione");
+        Random random = new Random();
+        int serial=random.nextInt(500)+1;
+        for(int i=0;i<partService.getAllParts().size();i++) {
+            if(partService.getAllParts().get(i).getCatalogNumber()==serial){
+                serial=random.nextInt(500)+1;
+                i=0;
+            }
+        }
+        part.setCatalogNumber(serial);
         partService.savePart(part);
         return "redirect:/client";
     }

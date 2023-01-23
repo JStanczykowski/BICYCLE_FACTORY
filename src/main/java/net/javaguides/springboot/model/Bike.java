@@ -1,8 +1,14 @@
 package net.javaguides.springboot.model;
 
 import net.javaguides.springboot.decorator.BikeInterface;
+import net.javaguides.springboot.responsibility.ChangeInterface;
+import net.javaguides.springboot.service.BikeService;
+import org.springframework.security.core.Authentication;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 @Entity
 @Table(name = "Bike")
@@ -61,14 +67,16 @@ public class Bike implements BikeInterface {
         private String currentValue;
         @Column(name = "size")
         private String size;
-//        @ManyToOne(cascade = CascadeType.ALL, optional = false)
-//        @JoinColumn(name = "order_id", nullable = false)
-//        private Orders orders;
 
-    public void setAnotherCurrent(String value){
+    public void setForeginPrice(ChangeInterface changeInterface, Iterator<Bike> iteratora, current cur){
+        setAnotherPrice(changeInterface.change(cur,price)+getCurrent());
 
-        setAnotherPrice(value+getCurrent());
+        while(iteratora.hasNext()){
+
+            iteratora.next().setForeginPrice(changeInterface,iteratora,cur);
+        }
     }
+
     public String getCurrentValue() {
         return currentValue;
     }

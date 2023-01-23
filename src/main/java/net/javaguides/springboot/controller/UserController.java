@@ -6,7 +6,6 @@ import net.javaguides.springboot.decorator.BikeInterface;
 import net.javaguides.springboot.decorator.BikeWithFS;
 import net.javaguides.springboot.decorator.BikeWithHT;
 import net.javaguides.springboot.model.Bike;
-import net.javaguides.springboot.model.Part;
 import net.javaguides.springboot.model.current;
 import net.javaguides.springboot.responsibility.ChangeCAD;
 import net.javaguides.springboot.responsibility.ChangeCHF;
@@ -71,50 +70,44 @@ public class UserController {
     @PostMapping("/client/list/current")
     public String saveCurrent(@ModelAttribute("bike") Bike bike){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        List<Bike> lista = new ArrayList<>();
+        for(Bike listBike: bikeService.getListBike(auth,bikeService)) {
+                listBike.setCurrentValue(bike.getCurrentValue());
+                lista.add(listBike);
+                bikeService.updateBike(listBike);
 
-        for(int i=0;i<bikeService.getAllBikes().size();i++) {
-            if(bikeService.getAllBikes().get(i).getNumberOwner().equals(auth.getName())){
-                current cur = new current();
-               Bike bik= bikeService.getAllBikes().get(i);
-               bik.setCurrentValue(bike.getCurrentValue());
-               ChangeEuro changeEuro = new ChangeEuro();
-                ChangeCAD changeCAD = new ChangeCAD();
-                ChangeCHF changeCHF = new ChangeCHF();
-                ChangeUSD changeUSD = new ChangeUSD();
-               if(bike.getCurrentValue().equals("USD")) {
-                   cur.setCurre(4.35);
-                   bik.setAnotherCurrent(changeUSD.usdPLN(cur,bik));
-               }
-                if(bike.getCurrentValue().equals("CAD")) {
-                    cur.setCurre(3.25);
-                    bik.setAnotherCurrent(changeCAD.cadPLN(cur,bik));
-                }
-                if(bike.getCurrentValue().equals("EUR")) {
-                    cur.setCurre(4.7);
-                    bik.setAnotherCurrent(changeEuro.euroPLN(cur,bik));
-                }
-                if(bike.getCurrentValue().equals("CHF")) {
-                    cur.setCurre(4.72);
-                    bik.setAnotherCurrent(changeCHF.chfPLN(cur,bik));
-                }
-
-                bikeService.updateBike(bik);
-
-            }
         }
-
+        current cur = new current();
+        if(lista.get(0).getCurrentValue().equals("USD")) {
+            ChangeUSD changeUSD = new ChangeUSD();
+            cur.setCurre(4.35);
+            lista.get(0).setForeginPrice(changeUSD,lista.iterator(),cur);
+        }
+        if(lista.get(0).getCurrentValue().equals("CAD")) {
+            ChangeCAD changeCAD = new ChangeCAD();
+            cur.setCurre(3.25);
+            lista.get(0).setForeginPrice(changeCAD,lista.iterator(),cur);
+        }
+        if(lista.get(0).getCurrentValue().equals("EUR")) {
+            ChangeEuro changeEuro = new ChangeEuro();
+            cur.setCurre(4.7);
+            lista.get(0).setForeginPrice(changeEuro,lista.iterator(),cur);
+        }
+        if(lista.get(0).getCurrentValue().equals("CHF")) {
+            ChangeCHF changeCHF = new ChangeCHF();
+            cur.setCurre(4.72);
+            lista.get(0).setForeginPrice(changeCHF,lista.iterator(),cur);
+        }
+        for(Bike listBike: bikeService.getListBike(auth,bikeService)) {
+                bikeService.updateBike(listBike);
+        }
         return "redirect:/client/list";
     }
     @GetMapping("/client/list")
     public String listBike(Model model){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        List<Bike> lista = new ArrayList<>();
-        for(int i=0;i<bikeService.getAllBikes().size();i++) {
-            if(bikeService.getAllBikes().get(i).getNumberOwner().equals(auth.getName())){
 
-                lista.add(bikeService.getAllBikes().get(i));
-            }
-        }
+        List<Bike> lista = bikeService.getListBike(auth,bikeService);
         model.addAttribute("bike",lista);
         return "bike_list";
     }
