@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+  <meta charset="ISO-8859-1">
+  <title>Bike list</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+</head>
+<body>
+<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+  <a class="navbar-brand" th:href="@{/client}">Client system</a>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Logout</a></li>
+</nav>
+
+<div class ="container">
+  <div class = "row" >
+    <h1 > Bike List  </h1>
+  </div>
+
+  <br>
+  <div class = "col-lg-3"><br>
+  <a th:href = "@{/client/list/current}" class = "btn btn-outline-success"> Change another current</a><br>
+</div>
+  <table class="table table-hover" th:action="@{/client/list}">
+    <thead class = "table-dark">
+    <tr>
+      <th> Zamowiony</th>
+      <th> Price</th>
+      <th> Another </th>
+      <th> bikeType</th>
+      <th> size</th>
+      <th> color</th>
+      <th> Addextend</th>
+      <th> HT</th>
+      <th> FS</th>
+      <th> change currency </th>
+      <th> Action</th>
+    </tr>
+    </thead>
+    <tbody >
+    <tr th:each = "bik: ${bike}">
+      <td th:text = "${bik.active}"></td>
+      <td th:text = "${bik.price}+ 'PLN'"></td>
+      <td th:text = "${bik.anotherPrice}"></td>
+      <td th:text = "${bik.bikeType}"></td>
+      <td th:text = "${bik.size}"></td>
+      <td th:text = "${bik.color}"></td>
+      <td th:text = "${bik.addextend}"></td>
+     <td> <a th:href = "@{/client/list/ht/{id}(id=${bik.id})}"
+         class="btn btn-dark">Add rame HT 29''</a>
+
+      <td> <a th:href = "@{/client/list/fs/{id}(id=${bik.id})}"
+              class="btn btn-dark">Add rame FS 29''</a>
+      <td> <a th:href = "@{/client/list/change/{id}(id=${bik.id})}"
+              class="btn btn-dark">Change</a>
+      <td> <a th:href = "@{/client/list/order/{id}(id=${bik.id})}"
+              class="btn btn-dark">Zamow</a>
+    </tr>
+
+    </tbody>
+  </table>
+  <div>
+
+
+  </div>
+</div>
+</body>
+</html>

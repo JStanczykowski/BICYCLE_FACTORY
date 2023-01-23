@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymealeaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+<head>
+  <meta charset="ISO-8859-1">
+  <title>Engineer</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+</head>
+<body>
+<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+  <a class="navbar-brand" th:href="@{/engineer}">Engineer system</a>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Logout</a></li>
+</nav>
+
+<div class ="container">
+  <div class = "row" >
+    <h1 > Engineer select  </h1>
+  </div>
+
+  <br>
+  <div style="margin: auto;text-align: center;"><button type="button" class="btn btn-primary btn-lg">
+    <a th:href="@{/engineer/part}" style="color:white;">Part list</a></button>
+  <button type="button" class="btn btn-primary btn-lg">
+    <a th:href="@{/engineer/bike}" style="color:white;">Bike list</a></button>
+    <button type="button" class="btn btn-primary btn-lg">
+      <a th:href="@{/client/add_part}" style="color:white;">Order part</a></button>
+  </div>
+</div>
+</body>
+</html>

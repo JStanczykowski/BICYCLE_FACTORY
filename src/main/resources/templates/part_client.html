@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymealeaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+<head>
+  <meta charset="ISO-8859-1">
+  <title>Technic</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+</head>
+<body>
+<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+  <a class="navbar-brand" th:href="@{/client}">Client system</a>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Logout</a></li>
+</nav>
+
+<div class ="container">
+  <div class = "row" >
+    <h1 > Parts List  </h1>
+  </div>
+
+  <br>
+  <table class="table table-hover" th:action="@{/client/part}">
+    <thead class = "table-dark">
+    <tr>
+      <th> partName</th>
+      <th> partProducer</th>
+      <th> ilosc</th>
+      <th> status</th>
+
+    </tr>
+    </thead>
+    <tbody >
+    <tr th:each = "engine: ${part}">
+      <td th:text = "${engine.partName}"></td>
+      <td th:text = "${engine.partProducer}"></td>
+      <td th:text = "${engine.ilosc}"></td>
+      <td th:text = "${engine.statusOrder}"></td><td>
+
+      <td>
+    </tr>
+    </tbody>
+  </table>
+  <div>
+
+
+  </div>
+</div>
+</body>
+</html>
