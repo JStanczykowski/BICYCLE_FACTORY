@@ -41,7 +41,7 @@ public class StockmanController {
         existingPart.setIlosc(part.getIlosc());
 
         existingPart.setStat(part.getStat());
-        if(existingPart.getStat().equals("ok")){
+        if(existingPart.getStat()==status.ok){
             existingPart.setStatusOrder("Czesci dostepne");
         }
         partService.updatePart(existingPart);

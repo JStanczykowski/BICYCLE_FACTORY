@@ -111,8 +111,8 @@ public class UserController {
         model.addAttribute("bike",lista);
         return "bike_list";
     }
-    @GetMapping("/client/list/blotnik/{id}")
-    public String blotnik(@PathVariable Long id, @ModelAttribute("bike") Bike bike){
+    @GetMapping("/client/list/fs/{id}")
+    public String fs(@PathVariable Long id, @ModelAttribute("bike") Bike bike){
         Bike obj = bikeService.getBikeById(id);
         if("Niepotwierdzone".equals(obj.getActive())) {
         BikeInterface bikeInterface = new BikeWithFS(obj);
@@ -123,8 +123,8 @@ public class UserController {
         }
         return "redirect:/client/list";
    }
-    @GetMapping("/client/list/swiatla/{id}")
-    public String swiatla(@PathVariable Long id, @ModelAttribute("bike") Bike bike){
+    @GetMapping("/client/list/ht/{id}")
+    public String ht(@PathVariable Long id, @ModelAttribute("bike") Bike bike){
         Bike obj = bikeService.getBikeById(id);
         if("Niepotwierdzone".equals(obj.getActive())) {
             BikeInterface bikeInterface = new BikeWithHT(obj);

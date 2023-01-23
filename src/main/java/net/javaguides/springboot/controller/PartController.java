@@ -44,7 +44,10 @@ public class PartController {
         }
         part.setCatalogNumber(serial);
         partService.savePart(part);
-        return "redirect:/client";
+        if(auth.getAuthorities().toString().equals("[INZYNIER]"))
+            return "redirect:/engineer/part";
+        else
+            return "redirect:/client";
     }
     @GetMapping("/client/part")
     public String part(Model model){

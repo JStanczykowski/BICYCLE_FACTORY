@@ -10,7 +10,6 @@
 </head>
 <body>
 
-	<!-- create navigation bar ( header) -->
 	<nav class="navbar navbar-inverse navbar-fixed-top">
 		<div class="container">
 			<div class="navbar-header">
@@ -22,19 +21,19 @@
 						class="icon-bar"></span>
 				</button>
 				<a class="navbar-brand" href="#" th:href="@{/}">Registration and
-					Login Module</a>
+					Login </a>
 			</div>
 		</div>
 	</nav>
 
 <br>
 <br>
-	<!-- Create HTML registration form -->
+
 	<div class="container">
 		<div class="row">
 			<div class="col-md-6 col-md-offset-3">
 
-				<!-- success message -->
+
 				<div th:if="${param.success}">
 					<div class="alert alert-info">You've successfully registered
 						to our awesome app!</div>

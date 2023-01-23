@@ -4,14 +4,14 @@
 
 <head>
   <meta charset="ISO-8859-1">
-  <title>Technic</title>
+  <title>Menago</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
         crossorigin="anonymous">
 </head>
 <body>
 <nav class="navbar navbar-expand-md bg-dark navbar-dark">
-  <a class="navbar-brand" href="@{/worker}">Technic system</a>
+  <a class="navbar-brand" href="@{/worker}">Menago system</a>
 
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
     <span class="navbar-toggler-icon"></span>
@@ -21,7 +21,7 @@
 
 <div class ="container">
   <div class = "row" >
-    <h1 > List worker xd </h1>
+    <h1 > List worker </h1>
   </div>
 
   <div class = "row">
@@ -32,10 +32,10 @@
   <table class ="table table-striped table-dark" th:action="@{/worker}">
     <thead class = "table-dark">
     <tr>
-      <th> Technic id</th>
+      <th> Worker id</th>
 
-      <th> Technic lastName</th>
-      <th> Technic email</th>
+      <th> Worker lastName</th>
+      <th> Worker email</th>
       <th> Worker Roles</th>
       <th> Actions </th>
     </tr>

@@ -10,7 +10,7 @@
 </head>
 <body>
 <nav class="navbar navbar-expand-md bg-dark navbar-dark">
-  <a class="navbar-brand" th:href="@{/client}">Engineer system</a>
+  <a class="navbar-brand" th:href="@{/client}">Client system</a>
 
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
     <span class="navbar-toggler-icon"></span>
@@ -52,10 +52,10 @@
       <td th:text = "${bik.size}"></td>
       <td th:text = "${bik.color}"></td>
       <td th:text = "${bik.addextend}"></td>
-     <td> <a th:href = "@{/client/list/blotnik/{id}(id=${bik.id})}"
+     <td> <a th:href = "@{/client/list/ht/{id}(id=${bik.id})}"
          class="btn btn-dark">Add rame HT 29''</a>
 
-      <td> <a th:href = "@{/client/list/swiatla/{id}(id=${bik.id})}"
+      <td> <a th:href = "@{/client/list/fs/{id}(id=${bik.id})}"
               class="btn btn-dark">Add rame FS 29''</a>
       <td> <a th:href = "@{/client/list/change/{id}(id=${bik.id})}"
               class="btn btn-dark">Change</a>

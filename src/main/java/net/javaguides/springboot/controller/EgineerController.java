@@ -41,10 +41,10 @@ public class EgineerController {
     @GetMapping("/engineer/part/{id}")
     public String emptyTask(@PathVariable Long id) {
         Part part = partService.getPartById(id);
-        part.setStat(status.valueOf("more"));
+        part.setStat(status.more);
 
         partService.updatePart(part);
-        return "redirect:/part";
+        return "redirect:/engineer/part";
     }
 
 }
