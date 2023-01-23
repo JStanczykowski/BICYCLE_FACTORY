@@ -118,7 +118,10 @@ public class Bike implements BikeInterface {
 
     @Override
     public void dodaj() {
-        this.setAddextend("");
+        if(getAddextend() == null)
+            this.setAddextend("");
+        else
+        this.setAddextend(getAddextend());
     }
 
     public static class BikeEntityBuilder {

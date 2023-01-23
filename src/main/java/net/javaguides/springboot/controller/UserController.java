@@ -56,7 +56,18 @@ public class UserController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         bike.setNumberOwner(auth.getName());
         bike.setSerialNumber(serial);
-        bike.setPrice(1000);
+        if(bike.getSize().equals("L")) {
+            bike.setPrice(1000);
+        }
+        if(bike.getSize().equals("M")) {
+            bike.setPrice(800);
+        }
+        if(bike.getSize().equals("S")) {
+            bike.setPrice(500);
+        }
+        if(bike.getSize().equals("XL")) {
+            bike.setPrice(1500);
+        }
         bikeService.saveBike(bike);
         return "redirect:/client";
     }
