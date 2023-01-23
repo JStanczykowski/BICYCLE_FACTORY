@@ -2,13 +2,12 @@ package net.javaguides.springboot.model;
 
 import net.javaguides.springboot.decorator.BikeInterface;
 import net.javaguides.springboot.responsibility.ChangeInterface;
-import net.javaguides.springboot.service.BikeService;
-import org.springframework.security.core.Authentication;
+
 
 import javax.persistence.*;
-import java.util.ArrayList;
+
 import java.util.Iterator;
-import java.util.List;
+
 
 @Entity
 @Table(name = "Bike")

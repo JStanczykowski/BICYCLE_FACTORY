@@ -27,7 +27,7 @@ import java.util.Random;
 
 @Controller
 public class UserController {
-    private BikeService bikeService;
+    private final BikeService bikeService;
 
     public UserController(BikeService bikeService) {
         this.bikeService = bikeService;

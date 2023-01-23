@@ -3,7 +3,6 @@ package net.javaguides.springboot.controller;
 import net.javaguides.springboot.model.Part;
 import net.javaguides.springboot.model.status;
 import net.javaguides.springboot.service.PartService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -16,7 +15,7 @@ import java.util.Random;
 
 @Controller
 public class PartController {
-    private PartService partService;
+    private final PartService partService;
 
     public PartController(PartService partService) {
         this.partService = partService;

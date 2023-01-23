@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class EngBikeController {
-    private TasksService tasksService;
+    private final TasksService tasksService;
 
-    private BikeService bikeService;
+    private final BikeService bikeService;
     private final TasksRepo tasksRepo;
 
     public EngBikeController(TasksService tasksService,

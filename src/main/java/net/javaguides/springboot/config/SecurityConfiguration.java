@@ -10,12 +10,11 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.web.SecurityFilterChain;
+
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import net.javaguides.springboot.service.UserService;
 
-import java.net.URL;
 
 @Configuration
 @EnableWebSecurity
@@ -46,27 +45,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 
-//		http.authorizeRequests().antMatchers(
-//				"/registration**",
-//				"/js/**",
-//				"/css/**",
-//				"/img/**",
-//				"/templates/**").permitAll();
 		http.authorizeRequests()
-//				.antMatchers("/").permitAll()
-//				.antMatchers("/h2/**").permitAll()
-//
-//				.antMatchers("/worker/edit/**").permitAll()
-//				.antMatchers("/technic/**").permitAll()
-//				.antMatchers("/worker/edit/**").hasRole("MENAGO")
-				//.antMatchers("/index.html").hasRole("USER")
+
 				.and()
 				.authorizeRequests().antMatchers("/worker/**").permitAll()
 				.and()
 				.authorizeRequests().antMatchers("/worker/edit/**").permitAll()
 				.and()
 				.authorizeRequests().antMatchers("/templates/**").permitAll()
-				//.anyRequest().authenticated()
+
 				.and()
 				.formLogin()
 				.loginPage("/login")
@@ -84,35 +71,4 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		http.headers().frameOptions().disable();
 	}
 
-//	@Bean
-//	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-//		http.csrf()
-//				.disable()
-//				.authorizeRequests()
-//				.antMatchers("/index.html")
-//				.hasRole("ROLE_USER")
-//				.antMatchers("/menago.html")
-//.anonymous()
-//				.antMatchers("/login*")
-//				.permitAll()
-//				.anyRequest()
-//				.authenticated()
-//				.and()
-//				.formLogin()
-//				.loginPage("/login.html")
-//				.loginProcessingUrl("/login.html")
-//				.defaultSuccessUrl("/login.html", true)
-//				// .failureUrl("/login.html?error=true")
-//
-//				.and()
-//				.logout()
-//				.logoutUrl("/logout")
-//				.deleteCookies("JSESSIONID")	;
-//
-//		// .and()
-//		// .exceptionHandling().accessDeniedPage("/accessDenied");
-//		// .exceptionHandling().accessDeniedHandler(accessDeniedHandler());
-//		return http.build();
-//
-//	}
 }

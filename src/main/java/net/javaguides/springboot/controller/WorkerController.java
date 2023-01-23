@@ -1,12 +1,6 @@
 package net.javaguides.springboot.controller;
-
-import net.javaguides.springboot.model.Role;
-import net.javaguides.springboot.model.Tasks;
 import net.javaguides.springboot.model.User;
-import net.javaguides.springboot.model.Worker;
-import net.javaguides.springboot.repository.UserRepository;
 import net.javaguides.springboot.service.UserService;
-import net.javaguides.springboot.service.WorkerService;
 import net.javaguides.springboot.web.dto.UserRegistrationDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -23,8 +17,8 @@ import java.util.stream.Collectors;
 public class WorkerController {
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
-    private UserService workerService;
-    private UserRepository userRepository;
+    private final UserService workerService;
+
     public WorkerController(UserService workerService){this.workerService =workerService;}
 
     @GetMapping("")
@@ -54,11 +48,9 @@ public class WorkerController {
     }
     @PostMapping("/{id}")
     public String updateWorker(@PathVariable Long id,
-                               @ModelAttribute("workers") User worker,
-                               Model model){
-
+                               @ModelAttribute("workers") User worker
+                              ){
         User existingWorker = workerService.getWorkerById(id);
-        //existingWorker.setId(id);
         existingWorker.setFirstName(worker.getLastName());
         existingWorker.setLastName(worker.getLastName());
         existingWorker.setEmail(worker.getEmail());
