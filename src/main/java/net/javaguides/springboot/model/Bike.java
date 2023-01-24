@@ -70,7 +70,7 @@ public class Bike implements BikeInterface {
     public void setForeginPrice(ChangeInterface changeInterface, Iterator<Bike> iteratora, current cur){
         setAnotherPrice(changeInterface.change(cur,price)+getCurrent());
 
-        while(iteratora.hasNext()){
+        if(iteratora.hasNext()){
 
             iteratora.next().setForeginPrice(changeInterface,iteratora,cur);
         }

@@ -124,6 +124,7 @@ public class BikeTest {
 
         assertThat(all.contains(bike));
     }
+
     @Test
     void adapter(){
         Bike bike = new Bike.BikeEntityBuilder().
